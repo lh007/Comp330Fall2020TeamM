@@ -1,0 +1,47 @@
+import java.util.*;
+import java.io.*;
+
+public class GraphType<E> {
+    //Global Variables
+    HashMap<E,ArrayList<E>> graph;
+    int vertexCount; //number of people in the graph
+    int edgeCount; //represents each relationship between people
+
+    //Default Constructor
+    public GraphType() {
+        vertexCount=0;
+        edgeCount=0;
+        graph=new HashMap<>();
+    }
+
+    //Returns a list of vertices connected to specified vertex
+    public ArrayList<E> getAdjacency(E vertex) {
+        return (graph.get(vertex));
+    }
+
+    //Adds a new vertex to the graph
+    public void addVertex(E vertex) {
+        graph.put(vertex,new ArrayList<E>()); //creates a new list with key=vertex
+        vertexCount++;
+    }
+
+    //Adds a new edge between specified vertices
+    public void addEdge(E v1,E v2) {
+        if (graph.containsKey(v1) && graph.containsKey(v2)) { //ensures both vertices are present
+            ArrayList<E> a1 = getAdjacency(v2);
+            a1.add(v1); //adding each vertex to the adjacency list of the other
+            ArrayList<E> a2 = getAdjacency(v1);
+            a2.add(v2);
+            edgeCount++;
+        } else {
+            System.out.println("Error: edge not added, one or more vertices cannot be found");
+        }
+    }
+
+    //Checks if there is an edge between the two specified vertices
+    public boolean isEdge(E v1,E v2) {
+        return (getAdjacency(v1).contains(v2));
+    }
+
+
+}

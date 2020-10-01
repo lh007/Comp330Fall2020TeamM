@@ -1,2 +1,24 @@
-// Reads in the geneology text file
+import java.util.*;
+import java.io.*;
+
+public class AcceptFile {
+    // Each line of file is formatted as follows:
+// Person,FamilyName,GivenName,Suffix,DOB,BirthPlace,DOD,DeathPlace,Parents
+// if a piece of info is not known or present, there will be a blank
+// ex. Person,FamilyName,GivenName,,DOB,BirthPlace,,,Parents
+    public void readFile(fileName) {
+        Scanner fileScanner;
+        String line;
+        try {
+            fileScanner=new Scanner(new File(fileName));
+            while(fileScanner.hasNext()) {
+                line=fileScanner.nextLine();
+
+            }
+        } catch (IOException e) {
+            System.out.println("File not found");
+        }
+    }
+}
+
 
