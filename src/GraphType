@@ -1,47 +1,61 @@
 import java.util.*;
-import java.io.*;
 
 public class GraphType<E> {
     //Global Variables
-    HashMap<E,ArrayList<E>> graph;
-    int vertexCount; //number of people in the graph
-    int edgeCount; //represents each relationship between people
+    HashMap<E,Person> graph;
+    //each person is represented as an arraylist, with their information stored at each respective index
+    int personCount; //number of people in the graph
+    int relationCount; //number of relationships between people
 
     //Default Constructor
     public GraphType() {
-        vertexCount=0;
-        edgeCount=0;
+        personCount=0;
+        relationCount=0;
         graph=new HashMap<>();
     }
 
-    //Returns a list of vertices connected to specified vertex
-    public ArrayList<E> getAdjacency(E vertex) {
-        return (graph.get(vertex));
+    //Non-Default Constructor
+    public GraphType(int n1,int n2) {
+        personCount=n1;
+        relationCount=n2;
+    }
+
+    //Returns a hashmap of relationships associated with the specified person
+    public HashMap<String,ArrayList<String>> getAdjacency(E personID) {
+        return (graph.get(personID).getRelationships());
     }
 
     //Adds a new vertex to the graph
-    public void addVertex(E vertex) {
-        graph.put(vertex,new ArrayList<E>()); //creates a new list with key=vertex
-        vertexCount++;
+    public void addPerson(E personID) {
+        if (!graph.containsKey(personID)) { //prevents duplicates
+            graph.put(personID,new Person());
+            personCount++;
+        }
     }
 
     //Adds a new edge between specified vertices
-    public void addEdge(E v1,E v2) {
-        if (graph.containsKey(v1) && graph.containsKey(v2)) { //ensures both vertices are present
-            ArrayList<E> a1 = getAdjacency(v2);
-            a1.add(v1); //adding each vertex to the adjacency list of the other
-            ArrayList<E> a2 = getAdjacency(v1);
-            a2.add(v2);
-            edgeCount++;
+    public void addRelation(E p1,E p2) {
+        if (graph.containsKey(p1) && graph.containsKey(p2)) { //ensures both vertices are present
+            ArrayList<E> a1 = getAdjacency(p2);
+            if (!a1.contains(p1)) { //prevents duplicates
+                a1.add(p1); //adding each vertex to the adjacency list of the other
+            }
+            ArrayList<E> a2 = getAdjacency(p1);
+            if (!a2.contains(p2)) { //prevents duplicates
+                a2.add(p1);
+            }
+            relationCount++;
         } else {
-            System.out.println("Error: edge not added, one or more vertices cannot be found");
+            System.out.println("Error: relationship not added, one or more people cannot be found");
         }
     }
 
     //Checks if there is an edge between the two specified vertices
-    public boolean isEdge(E v1,E v2) {
-        return (getAdjacency(v1).contains(v2));
+    public boolean isEdge(E p1,E p2) {
+        return (getAdjacency(p1).contains(p2));
     }
+
+
 
 
 }

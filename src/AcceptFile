@@ -6,11 +6,11 @@ public class AcceptFile {
 // Person,FamilyName,GivenName,Suffix,DOB,BirthPlace,DOD,DeathPlace,Parents
 // if a piece of info is not known or present, there will be a blank
 // ex. Person,FamilyName,GivenName,,DOB,BirthPlace,,,Parents
-    public void readFile(fileName) {
+    public void readFile(String filename) {
         Scanner fileScanner;
         String line;
         try {
-            fileScanner=new Scanner(new File(fileName));
+            fileScanner=new Scanner(new File(filename));
             while(fileScanner.hasNext()) {
                 line=fileScanner.nextLine();
 
