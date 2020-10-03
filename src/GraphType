@@ -2,7 +2,7 @@ import java.util.*;
 
 public class GraphType<E> {
     //Global Variables
-    HashMap<E,Person> graph; //key=personID, value=Person object
+    HashMap<E,Person> familyTree; //key=personID, value=Person object
     int personCount; //number of people in the graph
     int relationCount; //number of relationships between people
 
@@ -10,27 +10,24 @@ public class GraphType<E> {
     public GraphType() {
         personCount=0;
         relationCount=0;
-        graph=new HashMap<>();
-    }
-
-    //Non-Default Constructor
-    public GraphType(int n1,int n2) {
-        personCount=n1;
-        relationCount=n2;
+        familyTree=new HashMap<E,Person>();
     }
 
     //Adds a new vertex to the graph
     public void addPerson(E personID) {
-        if (!graph.containsKey(personID)) { //prevents duplicates
-            graph.put(personID,new Person());
+        if (!familyTree.containsKey(personID)) { //prevents duplicates
+            familyTree.put(personID,new Person());
             personCount++;
         }
     }
+    public Person getPerson(E personID) {
+        return (familyTree.get(personID));
+    }
 
     //Adds a new edge between specified vertices
-    public void addParent_Child(Person parentID, Person childID) {
-        childID.setRelationship("Parent",parentID);
-        parentID.setRelationship("Child",childID);
+    public void addParent_Child(Person parent, Person child) {
+        child.setRelationship("Parent",parent);
+        parent.setRelationship("Child",child);
     }
 
     //Checks if there is an edge between the two specified vertices, returns the type of relationship
