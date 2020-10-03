@@ -3,6 +3,7 @@ import java.io.*;
 
 public class Person {
     //Global Variables
+    private String personID;
     private String lastName;
     private String firstName;
     private String suffix;
@@ -15,6 +16,7 @@ public class Person {
 
     //Default Constructor
     public Person() {
+        personID=null;
         lastName=null;
         firstName=null;
         suffix=null;
@@ -25,65 +27,71 @@ public class Person {
         parentRelationID=null;
         relationships=null;
     }
+    public String getPersonID() { return personID; }
+    public void setPersonID(String val) { personID=val; }
 
-    public String getLastName() {
-        return lastName;
-    }
+    public String getLastName() { return lastName; }
     public void setLastName(String val) {
         lastName=val;
     }
-    public String getFirstName() {
-        return firstName;
-    }
+
+    public String getFirstName() { return firstName; }
     public void setFirstName(String val) {
         firstName=val;
     }
+
     public String getSuffix() {
         return suffix;
     }
     public void setSuffix(String val) {
         suffix=val;
     }
+
     public String getBirthDate() {
         return birthDate;
     }
     public void setBirthDate(String val) {
         birthDate=val;
     }
+
     public String getBirthPlace() {
         return birthPlace;
     }
     public void setBirthPlace(String val) {
         birthPlace=val;
     }
+
     public String getDeathDate() {
         return deathDate;
     }
     public void setDeathDate(String val) {
         deathDate=val;
     }
+
     public String getDeathPlace() {
         return deathPlace;
     }
     public void setDeathPlace(String val) {
         deathPlace=val;
     }
+
     public String getParentRelationID() {
         return parentRelationID;
     }
     public void setParentRelationID(String val) {
         parentRelationID=val;
     }
-    public HashMap<String,ArrayList<String>> getRelationships() {
+
+    public HashMap<String,ArrayList<String>> getRelationship() {
         return relationships;
     }
-    public void setRelationships(String type,String person) {
+    public void setRelationship(String type,Person person) {
         if (relationships.containsKey(type)) {
-            relationships.get(type).add(person);
+            relationships.get(type).add(String.valueOf(person));
         } else {
             relationships.put(type,new ArrayList<String>());
-            relationships.get(type).add(person);
+            relationships.get(type).add(String.valueOf(person));
         }
-
     }
-}
+
+}//class end

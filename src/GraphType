@@ -2,8 +2,7 @@ import java.util.*;
 
 public class GraphType<E> {
     //Global Variables
-    HashMap<E,Person> graph;
-    //each person is represented as an arraylist, with their information stored at each respective index
+    HashMap<E,Person> graph; //key=personID, value=Person object
     int personCount; //number of people in the graph
     int relationCount; //number of relationships between people
 
@@ -20,11 +19,6 @@ public class GraphType<E> {
         relationCount=n2;
     }
 
-    //Returns a hashmap of relationships associated with the specified person
-    public HashMap<String,ArrayList<String>> getAdjacency(E personID) {
-        return (graph.get(personID).getRelationships());
-    }
-
     //Adds a new vertex to the graph
     public void addPerson(E personID) {
         if (!graph.containsKey(personID)) { //prevents duplicates
@@ -34,26 +28,17 @@ public class GraphType<E> {
     }
 
     //Adds a new edge between specified vertices
-    public void addRelation(E p1,E p2) {
-        if (graph.containsKey(p1) && graph.containsKey(p2)) { //ensures both vertices are present
-            ArrayList<E> a1 = getAdjacency(p2);
-            if (!a1.contains(p1)) { //prevents duplicates
-                a1.add(p1); //adding each vertex to the adjacency list of the other
-            }
-            ArrayList<E> a2 = getAdjacency(p1);
-            if (!a2.contains(p2)) { //prevents duplicates
-                a2.add(p1);
-            }
-            relationCount++;
-        } else {
-            System.out.println("Error: relationship not added, one or more people cannot be found");
-        }
+    public void addParent_Child(Person parentID, Person childID) {
+        childID.setRelationship("Parent",parentID);
+        parentID.setRelationship("Child",childID);
     }
 
-    //Checks if there is an edge between the two specified vertices
-    public boolean isEdge(E p1,E p2) {
-        return (getAdjacency(p1).contains(p2));
-    }
+    //Checks if there is an edge between the two specified vertices, returns the type of relationship
+    //public String hasRelationship(Person p1,Person p2) {
+    //    for (p1.getRelationship().keySet() : p1.getRelationship().entrySet()) {
+    //
+    //    }
+    //}
 
 
 
