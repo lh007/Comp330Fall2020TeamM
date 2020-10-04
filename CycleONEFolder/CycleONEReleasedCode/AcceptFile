@@ -1,0 +1,43 @@
+import java.util.*;
+import java.io.*;
+
+public class AcceptFile {
+    // Each line of file is formatted as follows:
+// Person,FamilyName,GivenName,Suffix,DOB,BirthPlace,DOD,DeathPlace,Parents
+// if a piece of info is not known or present, there will be a blank
+// ex. Person,FamilyName,GivenName, ,DOB,BirthPlace, , ,Parents
+
+    //currently, this method adds all people to the graph
+    public void readFile(String filename) {
+        Scanner fileScanner;
+        String line=" ";
+        int lineNumber=1;
+        GraphType<String> familyTree=new GraphType<>();
+        try {
+            fileScanner=new Scanner(new File(filename));
+            while(fileScanner.hasNext()) {
+                if(lineNumber==1) {
+                    continue;
+                } else {
+                    line=fileScanner.nextLine();
+                    String[] personInfo=line.split(",");
+                    familyTree.addPerson(personInfo[0]);
+                    Person p = familyTree.getPerson(personInfo[0]);
+                    p.setPersonID(personInfo[0]);
+                    p.setLastName(personInfo[1]);
+                    p.setFirstName(personInfo[2]);
+                    p.setSuffix(personInfo[3]);
+                    p.setBirthDate(personInfo[4]);
+                    p.setBirthPlace(personInfo[5]);
+                    p.setDeathDate(personInfo[6]);
+                    p.setDeathPlace(personInfo[7]);
+                    p.setParentRelationID(personInfo[8]);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("File not found");
+        }
+    }
+}
+
+
