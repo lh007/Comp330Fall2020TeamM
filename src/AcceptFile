@@ -17,7 +17,11 @@ public class AcceptFile {
             fileScanner=new Scanner(new File(filename));
             while(fileScanner.hasNext()) {
                 if(lineNumber==1) {
-                    continue;
+                    //update this with size of graph to create empty nodes all at once
+                    continue; //goes to the next line
+                }
+                else if (line.equals(",,,,,,,,")) {
+                    break; //ends loop for reading in a Person object
                 } else {
                     line=fileScanner.nextLine();
                     String[] personInfo=line.split(",");
