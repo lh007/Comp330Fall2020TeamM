@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Comp330Fall2020TeamM.iml" filepath="$PROJECT_DIR$/Comp330Fall2020TeamM.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CycleONEFolder/CycleONEFolder.iml" filepath="$PROJECT_DIR$/CycleONEFolder/CycleONEFolder.iml" />
+    </modules>
+  </component>
+</project>
