@@ -15,6 +15,7 @@ public class Person {
     private HashMap<String,ArrayList<String>> relationships; //a list of relationships associated with each person, key=type, value=people
 
     //Default Constructor
+
     public Person() {
         personID=null;
         lastName=null;

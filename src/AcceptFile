@@ -11,20 +11,15 @@ public class AcceptFile {
     public void readFile(String filename) {
         Scanner fileScanner;
         String line=" ";
-        int lineNumber=1;
+        String[] lineInfo=null;
         GraphType<String> familyTree=new GraphType<>();
         try {
             fileScanner=new Scanner(new File(filename));
             while(fileScanner.hasNext()) {
-                if(lineNumber==1) {
+                line=fileScanner.nextLine();
+                if(line.equals("Person,35,,,,,,,")) {
                     //update this with size of graph to create empty nodes all at once
-                    continue; //goes to the next line
-                }
-                else if (line.equals(",,,,,,,,")) {
-                    break; //ends loop for reading in a Person object
-                } else {
-                    line=fileScanner.nextLine();
-                    String[] personInfo=line.split(",");
+                    lineInfo=line.split(",");
                     familyTree.addPerson(personInfo[0]);
                     Person p = familyTree.getPerson(personInfo[0]);
                     p.setPersonID(personInfo[0]);
@@ -36,6 +31,12 @@ public class AcceptFile {
                     p.setDeathDate(personInfo[6]);
                     p.setDeathPlace(personInfo[7]);
                     p.setParentRelationID(personInfo[8]);
+                }
+                else if (line.equals("Partnership,10, , , , , , , ")) {
+                    lineInfo=line.split(",");
+                }
+                else if (line.equals(Children,,,,,,,,)){
+                    lineInfo=line.split(",");
                 }
             }
         } catch (IOException e) {

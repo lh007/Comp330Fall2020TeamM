@@ -28,6 +28,7 @@ public class GraphType<E> {
     public void addParent_Child(Person parent, Person child) {
         child.setRelationship("Parent",parent);
         parent.setRelationship("Child",child);
+
     }
 
     //Checks if there is an edge between the two specified vertices, returns the type of relationship

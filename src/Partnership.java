@@ -1,4 +1,5 @@
 //Relationships
 
 public class Partnership {
+
 }
