@@ -23,8 +23,14 @@ public class GraphType<E> {
     public Person getPerson(E personID) {
         return (familyTree.get(personID));
     }
+    public Partnership addPartnership(E rID) {
 
-    //Adds a new edge between specified vertices
+    }
+    public Partnership getPartnership(E rID) {
+
+    }
+
+    //Adds parent-child relationship
     public void addParent_Child(Person parent, Person child) {
         child.setRelationship("Parent",parent);
         parent.setRelationship("Child",child);
