@@ -1,4 +1,3 @@
-//import familyTree.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -7,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.lang.Math;
 import java.util.stream.Collectors;
 
 public class TreeGenealogy{
@@ -23,7 +23,15 @@ public class TreeGenealogy{
         TreeGenealogy t = new TreeGenealogy(treeFile);
         //at this point t is now populated with all data from the family tree text file.
 
-        t.printPeople();
+        //the print people method can be set to false if you do not want all border widths to be normalized to the same width.
+        t.printPeople(true);
+    }
+
+    private int getOverallMaxWidth(){
+        int maxValFound = 0;
+        for( Person p : people.values())
+            maxValFound = Math.max(maxValFound, p.getMaxWidth());
+        return maxValFound;
     }
 
     public TreeGenealogy(String dataFileName) throws IOException {
@@ -74,11 +82,21 @@ public class TreeGenealogy{
 
     }
 
+    public void printPeople(boolean normalize){
+        if(normalize) {
+            printPeople(getOverallMaxWidth());
+        } else{
+            for (Map.Entry<String, Person> entry : people.entrySet()) {
+                System.out.println("Key: " + entry.getKey() + "\n" + "Value: \n" + entry.getValue().generatePrintableVisual());
+            }
+        }
+    }
+
     //simple console printing of all Persons
-    public void printPeople(){
+    public void printPeople(int widthToUse){
         //simple printing test of the data
         for(Map.Entry<String, Person> entry : people.entrySet()){
-            System.out.println("Key: " + entry.getKey() + "\n" + "Value: \n" + entry.getValue().generatePrintableVisual());
+            System.out.println("Key: " + entry.getKey() + "\n" + "Value: \n" + entry.getValue().generatePrintableVisual(widthToUse));
         }
     }
 

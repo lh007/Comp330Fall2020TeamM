@@ -1,4 +1,3 @@
-//package familyTree;
 import java.lang.Math;
 
 /**
@@ -7,6 +6,12 @@ import java.lang.Math;
  */
 public class Person {
     //Global Variables
+    private enum Orientation {
+        CENTER_JUSTIFY,
+        LEFT_JUSTIFY,
+        RIGHT_JUSTIFY,
+        OUTER_EDGES
+    }
     /*
         Note: The current order from the family tree text file is (all data in one row):
             personID, lastName, firstName, suffix, birthDate,
@@ -22,6 +27,8 @@ public class Person {
     private String deathPlace   = null;
 
     private String childOfR = null;
+
+    private int maxWidth = 0;
 
     //Default Constructor
     public Person() {}
@@ -67,10 +74,14 @@ public class Person {
     public String   getChildOfR()                   { return childOfR;}
     public void     setChildOfR(String childOfR)    { this.childOfR = childOfR;}
 
+
     public String generatePrintableVisual(){
-        return String.join("\n", generateVisuals());
+        return generatePrintableVisual(maxWidth);
     }
 
+    public String generatePrintableVisual(int widthToUse){
+        return String.join("\n", generateVisuals(widthToUse));
+    }
 
     /*
            ******************* <--[0]
@@ -80,62 +91,110 @@ public class Person {
            * Death:    Place:* <--[4]
            ******************* <--[5]
      */
+
     public String[] generateVisuals(){
-        int maxWidth;
+        return generateVisuals(maxWidth);
+    }
+
+    public String[] generateVisuals(int widthToUse){
+        determineMaxWidth();
+
+        //this prevents the width from being anything less than the minimum determined in maxWidth
+        widthToUse = Math.max(maxWidth, widthToUse);
         String[] s = new String[6];
 
-        String parentSide = "Parents: " + (childOfR == null ? "N/A" : childOfR);
-        String pIDSide = "ID: " + personID;
-        int idWidth = parentSide.length() + pIDSide.length();
-        maxWidth = idWidth;
-
-        String fullName = firstName + " " + lastName + (suffix == null ? "" : ", " + suffix);
-        int fullNameWidth = fullName.length();
-        maxWidth = Math.max(fullNameWidth,maxWidth);
-
-        String bornDateSide = "Born: " + (birthDate == null ? "N/A" : birthDate);
-        String bornPlaceSide = "birthPlace: " + (birthPlace == null ? "N/A" : birthPlace);
-        int birthLengthMin = bornDateSide.length() + bornPlaceSide.length();
-        maxWidth = Math.max(birthLengthMin,maxWidth);
-
-
-        String deathDateSide = "Death: " + (deathDate == null ? "N/A" : deathDate);
-        String deathPlaceSide = "deathPlace: " + (deathPlace == null ? "N/A" : deathPlace);
-        int deathLengthMin = deathDateSide.length() + deathPlaceSide.length();
-        maxWidth = Math.max(deathLengthMin,maxWidth);
-
-        maxWidth += 4;
-
         //[0]: top star border
-        s[0] = "*".repeat(maxWidth+2);
+        s[0] = "*".repeat(widthToUse+2);
 
         //[1]: ID row
-        s[1] = "*" + parentSide + " ".repeat(maxWidth - idWidth) + pIDSide + "*";
+        s[1] = twoStringCLR(parentString(), pIDString(), Orientation.OUTER_EDGES, widthToUse);
 
         //[2]: Name row
-        int fnSpacing = (maxWidth - fullNameWidth)/2;
-        s[2] = "*" + " ".repeat(fnSpacing) + fullName + " ".repeat(maxWidth - fnSpacing - fullNameWidth) + "*";
-
-        String emptyRow = "*" + " ".repeat(maxWidth) + "*";
+        s[2] = oneStringCLR(fullNameString(), Orientation.CENTER_JUSTIFY, widthToUse);
 
         //[3]: birth date/place row
         if (birthDate == null && birthPlace == null){
-            s[3] = emptyRow;
+            s[3] = blankRow(widthToUse);
         } else {
-            s[3] = "*" + bornDateSide + " ".repeat(maxWidth - birthLengthMin) + bornPlaceSide + "*";
+            s[3] = twoStringCLR(bornDateString(), bornPlaceString(), Orientation.OUTER_EDGES, widthToUse);
         }
 
         //[4]: death date/place row
         if (deathDate == null && deathPlace == null){
-            s[4] = emptyRow;
+            s[4] = blankRow(widthToUse);
         } else {
-            s[4] = "*" + deathDateSide + " ".repeat(maxWidth - deathLengthMin) + deathPlaceSide + "*";
+            s[4] = twoStringCLR(deathDateString(), deathPlaceString(), Orientation.OUTER_EDGES, widthToUse);
         }
 
         //[5]: bottom star border
         s[5] = s[0];
 
         return s;
+    }
+
+    private String blankRow()               { return blankRow(maxWidth);}
+    private String blankRow(int widthToUse) { return "*" + " ".repeat(widthToUse) + "*";}
+    private String parentString()           { return "Parents: " + (childOfR == null ? "N/A" : childOfR); }
+    private String pIDString()              { return "ID: " + personID; }
+    private String fullNameString()         { return firstName + " " + lastName + (suffix == null ? "" : ", " + suffix); }
+    private String bornDateString()         { return "Born: " + (birthDate == null ? "N/A" : birthDate); }
+    private String bornPlaceString()        { return "birthPlace: " + (birthPlace == null ? "N/A" : birthPlace); }
+    private String deathDateString()        { return "Death: " + (deathDate == null ? "N/A" : deathDate); }
+    private String deathPlaceString()       { return "deathPlace: " + (deathPlace == null ? "N/A" : deathPlace); }
+
+    public int getMaxWidth(){
+        determineMaxWidth();
+        return maxWidth;
+    }
+
+    private void determineMaxWidth(){
+        int idWidth = parentString().length() + pIDString().length();
+        int fullNameWidth = fullNameString().length();
+        int birthLengthMin = bornDateString().length() + bornPlaceString().length();
+        int deathLengthMin = deathDateString().length() + deathPlaceString().length();
+
+        maxWidth = Math.max(maxWidth, idWidth + 4);
+        maxWidth = Math.max(maxWidth, fullNameWidth + 4);
+        maxWidth = Math.max(maxWidth, birthLengthMin + 4);
+        maxWidth = Math.max(maxWidth, deathLengthMin + 4);
+    }
+
+    private static String oneStringCLR(String s, Orientation o, int widthToUse){
+        int sLength = s.length();
+        String result = "";
+        switch (o){
+            case LEFT_JUSTIFY:
+                result = "*" + s + " ".repeat(widthToUse - sLength) + "*";
+                break;
+            case RIGHT_JUSTIFY:
+                result =  "*"  + " ".repeat(widthToUse - sLength) + s +  "*";
+                break;
+            case CENTER_JUSTIFY:
+                int fnSpacing = (widthToUse - sLength)/2;
+                result = "*" + " ".repeat(fnSpacing) + s + " ".repeat(widthToUse - fnSpacing - sLength) + "*";
+                break;
+        }
+        return result;
+    }
+
+    private static String twoStringCLR(String leftString, String rightString, Orientation o, int widthToUse){
+        int leftLength = leftString.length();
+        int rightLength = rightString.length();
+        int sumLength = leftLength + rightLength;
+
+        //this prevents the width from being anything less than the minimum determined in sumLength+1
+        widthToUse = Math.max(widthToUse, sumLength+1);
+
+        String result = "";
+
+        //only one enum currently in use. Utility may be increased in a later update.
+        switch (o){
+            case OUTER_EDGES:
+                result = "*" + leftString + " ".repeat(widthToUse - sumLength) + rightString + "*";
+                break;
+        }
+
+        return result;
     }
 
     //generic toString for data testing. May be altered later.

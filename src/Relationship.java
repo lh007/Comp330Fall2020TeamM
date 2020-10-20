@@ -1,8 +1,5 @@
-//package familyTree;
-//import familyTree.Person;
 import java.util.List;
 import java.util.ArrayList;
-import java.lang.StringBuilder;
 
 /**
  * Relationship class stores parents and a list of children of the Person class.
