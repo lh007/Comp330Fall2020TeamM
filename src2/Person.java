@@ -1,4 +1,6 @@
 import java.lang.Math;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -24,6 +26,31 @@ public class Person {
     private String childOfR = null;
 
     private Set<String> belongToRelations = new HashSet<>();
+
+    private String gender = null;
+
+
+
+    /*
+     * Values will be restricted to m, f, s, d and backups (if gender unkown) p and c for parent/child
+     * Also, once the chain begins traversing down (s or d), it must only continue subsequent
+     * traversals in that manner, for example:
+     * mfs = uncle
+     * mmd = aunt
+     * mmds = first cousin (male)
+     *
+     * you cannot have s or d appear at any point before m or f.
+     * Example of wrong relation chains:
+     * smf
+     * sdmf (this is technically the same as s)
+    */
+    public static Person sourcePerson = null;
+    public long titleTimeStamp = 0;
+
+    //structure will be "Depth# hierarchy" where depth# is the depth of the title recursion
+    //Example: 3 mmf = aunt found after 3 recursions
+    public List<String> relationChain = new ArrayList<>();
+    public List<String> familyTitle = new ArrayList<>();
 
     //Default Constructor
     public Person() {}
@@ -71,5 +98,8 @@ public class Person {
 
     public Set<String>  getRelations()                  { return belongToRelations; }
     public void         addRelation(String s)           { this.belongToRelations.add(s); }
+
+    public String       getGender()                     { return gender; }
+    public void         setGender(String gender)        { this.gender = gender; }
 
 }//class end

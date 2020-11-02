@@ -1,6 +1,5 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.lang.Math;
 
 /**
  * Relationship class stores parents and a list of children of the Person class.
@@ -42,6 +41,7 @@ public class Relationship {
 
     public Person   getMaleParent()                             { return maleParent; }
     public void     setMaleParent(Person maleParent)            { this.maleParent = maleParent; }
+
 
     public List<Person> getParents(){
         List<Person> result = new ArrayList<>();
