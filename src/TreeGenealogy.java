@@ -53,13 +53,12 @@ public class TreeGenealogy{
                 p.titleTimeStamp = timeStamp;
             }
 
-            String currentGender = p.getGender();
-            String specificHierarchy = String.valueOf(depth) + " ";
-
             if (depth == 0){
                 p.relationChain.add("0 ?");
                 p.familyTitle.add("Self");
             } else {
+                String currentGender = p.getGender();
+                String specificHierarchy = String.valueOf(depth) + " ";
                 if (currentGender != null)
                     specificHierarchy += currentHierarchy.substring(0, currentHierarchy.length() - 1) + (currentGender.equals("m") ? "f" : "m");
                 else
@@ -97,11 +96,11 @@ public class TreeGenealogy{
                     Person maleParent = r.getMaleParent();
 
                     if (depth == 0 && femaleParent != null && femaleParent != p) {
-                        femaleParent.relationChain.add("w-");
-                        femaleParent.familyTitle.add(DataPrep.decodeFamilyTitle("w-"));
+                        femaleParent.relationChain.add("0 w");
+                        femaleParent.familyTitle.add(DataPrep.decodeFamilyTitle("0 w"));
                     } else if (depth == 0 && maleParent != null && maleParent != p){
-                        maleParent.relationChain.add("h-");
-                        maleParent.familyTitle.add(DataPrep.decodeFamilyTitle("h-"));
+                        maleParent.relationChain.add("0 h");
+                        maleParent.familyTitle.add(DataPrep.decodeFamilyTitle("0 h"));
                     }
 
                     for (Person child : r.getChildren()){
@@ -158,11 +157,11 @@ public class TreeGenealogy{
                     Person femaleParent = r.getFemaleParent();
                     Person maleParent = r.getMaleParent();
                     if (femaleParent != null && femaleParent != p){
-                        String marriageHierarchy = String.valueOf(depth) + " " + currentHierarchy.substring(0, currentHierarchy.length() - 1) + "d-";
+                        String marriageHierarchy = String.valueOf(depth) + " " + currentHierarchy.substring(0, currentHierarchy.length() - 1) + "d -";
                         femaleParent.relationChain.add(marriageHierarchy);
                         femaleParent.familyTitle.add(DataPrep.decodeFamilyTitle(marriageHierarchy));
                     } else if (maleParent != null && maleParent != p){
-                        String marriageHierarchy = String.valueOf(depth) + " " + currentHierarchy.substring(0, currentHierarchy.length() - 1) + "s-";
+                        String marriageHierarchy = String.valueOf(depth) + " " + currentHierarchy.substring(0, currentHierarchy.length() - 1) + "s -";
                         maleParent.relationChain.add(marriageHierarchy);
                         maleParent.familyTitle.add(DataPrep.decodeFamilyTitle(marriageHierarchy));
                     }
