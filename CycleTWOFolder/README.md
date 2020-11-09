@@ -1,4 +1,16 @@
-# Team M Cycle 2 Submission
-In this folder you will find the updated Requirements/Use Cases File and the updated code in the Folder titled CycleTWOReleasedCode
+Team M Cycle Two Submission 
 
-# In the Code Folder:
+Included in this folder are the following things: 
+
+Design Folder:
+	- UML Designs 
+
+Requirements Folder:
+	- Requirements Doc 
+	- Use Case Narratives
+
+Released Code:
+	- Most up to date code
+
+Meeting Reports:
+	- All the meeting reports for our team
