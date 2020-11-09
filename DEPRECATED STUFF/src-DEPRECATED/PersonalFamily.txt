@@ -1,0 +1,18 @@
+Person,5,,,,,,,
+P1,Alcazar,Walter, ,10/12/1985,Chicago, , ,R1
+P2,Alcazar,Joshua, ,12/1/1986,Chicago, , ,R1
+P3,Alcazar,Ramon, ,7/19/1931,Jalisco,1/15/2005, ,
+P4,Alcazar,Maria,Yebra,8/19/1948,Tijuana,12/10/2016, ,
+P5,Ruiz,Marco, , ,Guadalajara, , ,R1
+P6,Grant,Teia, , ,Chicago, , ,
+P7,Alcazar,Leo, , ,Chicago, , ,R2
+,,,,,,,,
+Partnership,10, , , , , , ,
+R1,P4,P3, ,1/15/2005, , , ,
+R2,P6,P2,8/11/2018, ,Barcelona, , ,
+,,,,,,,,
+Children,,,,,,,,
+R1,P1, , , , , , ,
+R1,P2, , , , , , ,
+R1,P5, , , , , , ,
+R2,P7, , , , , , ,
