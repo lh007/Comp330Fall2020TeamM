@@ -1,16 +1,16 @@
-Team M Cycle Two Submission 
+# Team M Cycle Two Submission 
 
 Included in this folder are the following things: 
 
-Design Folder:
+# Design Folder:
 	- UML Designs 
 
-Requirements Folder:
+# Requirements Folder:
 	- Requirements Doc 
 	- Use Case Narratives
 
-Released Code:
+# Released Code:
 	- Most up to date code
 
-Meeting Reports:
+# Meeting Reports:
 	- All the meeting reports for our team
