@@ -310,7 +310,7 @@ public class TreeGenealogy{
 
         i += 2; //skip the empty row between sections
 
-        //Loading Children into the Relationship children array
+        //Loading Children into the JavaClasses.Relationship children array
         for(; i<data.size(); i++){
             String[] d = DataPrep.scrapeData(data.get(i));
 

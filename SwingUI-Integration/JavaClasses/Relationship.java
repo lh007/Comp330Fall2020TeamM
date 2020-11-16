@@ -1,3 +1,7 @@
+package JavaClasses;
+
+import JavaClasses.Person;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -9,14 +13,14 @@ public class Relationship {
         Note: Current file order:
         Key/ID, femaleParent, maleParent, startDate, endDate, marriageLocation
      */
-    private static String relationshipID   = null;
-    private static Person femaleParent     = null;
-    private static Person maleParent       = null;
+    private String relationshipID   = null;
+    private Person femaleParent     = null;
+    private Person maleParent       = null;
     private String startDate        = null;
     private String endDate          = null;
     private String marriageLocation = null;
 
-    private static List<Person> children   = new ArrayList<>();
+    private List<Person> children   = new ArrayList<>();
 
     //Default Constructor
     public Relationship() {}
@@ -33,13 +37,13 @@ public class Relationship {
         this.marriageLocation = marriageLocation;
     }
 
-    public static String   getRelationshipID()                         { return relationshipID; }
+    public String   getRelationshipID()                         { return relationshipID; }
     public void     setRelationshipID(String relationshipID)    { this.relationshipID = relationshipID; }
 
-    public static Person   getFemaleParent()                           { return femaleParent; }
+    public Person   getFemaleParent()                           { return femaleParent; }
     public void     setFemaleParent(Person femaleParent)        { this.femaleParent = femaleParent; }
 
-    public static Person   getMaleParent()                             { return maleParent; }
+    public Person   getMaleParent()                             { return maleParent; }
     public void     setMaleParent(Person maleParent)            { this.maleParent = maleParent; }
 
 
@@ -62,7 +66,7 @@ public class Relationship {
     public String   getMarriageLocation()                       { return marriageLocation; }
     public void     setMarriageLocation(String marriageLocation){ this.marriageLocation = marriageLocation; }
 
-    public static List<Person> getChildren()                           { return children; }
+    public List<Person> getChildren()                           { return children; }
 
     public void addChild(Person child) {
         if (!this.children.contains(child))

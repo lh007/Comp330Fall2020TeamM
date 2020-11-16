@@ -1,13 +1,12 @@
-import java.io.File;
+package JavaClasses;
+
+import JavaClasses.DataPrep;
+
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Scanner;
-import java.lang.Math;
-import java.util.Random;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -247,7 +246,7 @@ public class TreeGenealogy{
     }
 
     public Relationship getRelationship(String rID) { return (relations.containsKey(rID) ? relations.get(rID) : null); }
-    public Person       getPerson(String pID)       { return (people.containsKey(pID) ? people.get(pID) : null); }
+    public Person getPerson(String pID)       { return (people.containsKey(pID) ? people.get(pID) : null); }
 
 
 
