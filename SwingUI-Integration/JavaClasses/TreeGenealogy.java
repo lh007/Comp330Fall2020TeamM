@@ -16,6 +16,9 @@ public class TreeGenealogy{
     private int initialPersonCapacity = 0;
     private int initialRelationshipCapacity = 0;
 
+    public Map<String,Person> getPeople() {
+        return people;
+    }
     /*
      *  FAMILY TITLES SECTION
      */

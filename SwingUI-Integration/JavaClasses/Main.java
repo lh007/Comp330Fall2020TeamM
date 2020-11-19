@@ -2,10 +2,15 @@ package JavaClasses;
 
 import JavaClasses.DataPrep;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Main{
+
     private static final String defaultFamilyTree = "FamilyTreeInputTextFileV2.txt";
     public static void main(String args[]) throws IOException{
         String treeFile = (args.length == 1 ? args[0] : defaultFamilyTree);
@@ -78,6 +83,5 @@ public class Main{
             System.out.println(s);
 
     }
-
 
 }
