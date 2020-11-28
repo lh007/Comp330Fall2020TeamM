@@ -2,7 +2,7 @@ import java.util.*;
 
 public class GraphType<E> {
     //Global Variables
-    HashMap<E,Person> familyTree; //key=personID, value=Person object
+    HashMap<E,JavaClasses.Person> familyTree; //key=personID, value=JavaClasses.Person object
     int personCount; //number of people in the graph
     int relationCount; //number of relationships between people
 
@@ -10,17 +10,17 @@ public class GraphType<E> {
     public GraphType() {
         personCount=0;
         relationCount=0;
-        familyTree=new HashMap<E,Person>();
+        familyTree=new HashMap<E,JavaClasses.Person>();
     }
 
     //Adds a new vertex to the graph
     public void addPerson(E personID) {
         if (!familyTree.containsKey(personID)) { //prevents duplicates
-            familyTree.put(personID,new Person());
+            familyTree.put(personID,new JavaClasses.Person());
             personCount++;
         }
     }
-    public Person getPerson(E personID) {
+    public JavaClasses.Person getPerson(E personID) {
         return (familyTree.get(personID));
     }
     public Partnership addPartnership(E rID) {
@@ -31,14 +31,14 @@ public class GraphType<E> {
     }
 
     //Adds parent-child relationship
-    public void addParent_Child(Person parent, Person child) {
+    public void addParent_Child(JavaClasses.Person parent, JavaClasses.Person child) {
         child.setRelationship("Parent",parent);
         parent.setRelationship("Child",child);
 
     }
 
     //Checks if there is an edge between the two specified vertices, returns the type of relationship
-    //public String hasRelationship(Person p1,Person p2) {
+    //public String hasRelationship(JavaClasses.Person p1,JavaClasses.Person p2) {
     //    for (p1.getRelationship().keySet() : p1.getRelationship().entrySet()) {
     //
     //    }

@@ -1,13 +1,12 @@
-import java.io.File;
+package JavaClasses;
+
+import JavaClasses.DataPrep;
+
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Scanner;
-import java.lang.Math;
-import java.util.Random;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -17,6 +16,7 @@ public class TreeGenealogy{
     private int initialPersonCapacity = 0;
     private int initialRelationshipCapacity = 0;
 
+    public Map<String, Person> getPeople() { return people; }
     /*
      *  FAMILY TITLES SECTION
      */
@@ -305,7 +305,7 @@ public class TreeGenealogy{
 
         i += 2; //skip the empty row between sections
 
-        //Loading Children into the JavaClasses.Relationship children array
+        //Loading Children into the JavaClasses.JavaClasses.Relationship children array
         for(; i<data.size(); i++){
             String[] d = DataPrep.scrapeData(data.get(i));
 

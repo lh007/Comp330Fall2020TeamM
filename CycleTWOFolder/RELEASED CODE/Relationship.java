@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.lang.Math;
 
 /**
- * Relationship class stores parents and a list of children of the Person class.
+ * JavaClasses.Relationship class stores parents and a list of children of the JavaClasses.Person class.
  */
 public class Relationship {
     /*

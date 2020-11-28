@@ -263,10 +263,10 @@ public class Visuals {
     public String toString_Rel(){
         String s = "";
         s += "--------Parents:-------\n" +
-                "Mother: " + (JavaClasses.Person.getFemaleParent() == null ? "N/A" : JavaClasses.Person.getFemaleParent().toString()) + "\n" +
-                "Father: " + (JavaClasses.Person.getMaleParent() == null ? "N/A" : getMaleParent().toString()) + "\n" +
+                "Mother: " + (JavaClasses.JavaClasses.Person.getFemaleParent() == null ? "N/A" : JavaClasses.JavaClasses.Person.getFemaleParent().toString()) + "\n" +
+                "Father: " + (JavaClasses.JavaClasses.Person.getMaleParent() == null ? "N/A" : getMaleParent().toString()) + "\n" +
                 "-------Children:-----\n";
-        for(JavaClasses.Person p : JavaClasses.Relationship.getChildren()){
+        for(JavaClasses.JavaClasses.Person p : JavaClasses.JavaClasses.Relationship.getChildren()){
             s += p.toString() + "\n";
         }
 

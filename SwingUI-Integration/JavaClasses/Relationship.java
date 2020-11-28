@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * JavaClasses.Relationship class stores parents and a list of children of the JavaClasses.Person class.
+ * JavaClasses.JavaClasses.Relationship class stores parents and a list of children of the JavaClasses.JavaClasses.Person class.
  */
 public class Relationship {
     /*

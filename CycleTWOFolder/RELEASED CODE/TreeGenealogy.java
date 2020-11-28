@@ -341,7 +341,7 @@ public class TreeGenealogy{
         if (pID != null && people.containsKey(pID)) {
             System.out.println(people.get(pID).generatePrintableVisual());
         } else {
-            System.out.println("Person ID: " + String.valueOf(pID) + " does not exist.");
+            System.out.println("JavaClasses.Person ID: " + String.valueOf(pID) + " does not exist.");
         }
 
     }
@@ -407,7 +407,7 @@ public class TreeGenealogy{
 
         i += 2; //skip the empty row between sections
 
-        //Loading Children into the Relationship children array
+        //Loading Children into the JavaClasses.Relationship children array
         for(; i<data.size(); i++){
             String[] d = scrapeData(data.get(i));
 

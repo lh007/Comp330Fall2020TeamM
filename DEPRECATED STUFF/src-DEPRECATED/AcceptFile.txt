@@ -3,9 +3,9 @@ import java.io.*;
 
 public class AcceptFile {
     // Each line of file is formatted as follows:
-// Person,FamilyName,GivenName,Suffix,DOB,BirthPlace,DOD,DeathPlace,Parents
+// JavaClasses.Person,FamilyName,GivenName,Suffix,DOB,BirthPlace,DOD,DeathPlace,Parents
 // if a piece of info is not known or present, there will be a blank
-// ex. Person,FamilyName,GivenName, ,DOB,BirthPlace, , ,Parents
+// ex. JavaClasses.Person,FamilyName,GivenName, ,DOB,BirthPlace, , ,Parents
 
     //currently, this method adds all people to the graph
     public void readFile(String filename) {
@@ -19,10 +19,10 @@ public class AcceptFile {
                 line=fileScanner.nextLine();
 
                 // !WAY TO COLLECT DATA! //
-                // Person //
+                // JavaClasses.Person //
                 lineInfo=line.split(",");
                 familyTree.addPerson(personInfo[0]);
-                Person per = familyTree.getPerson(personInfo[0]);
+                JavaClasses.Person per = familyTree.getPerson(personInfo[0]);
                 per.setPersonID(personInfo[0]);
                 per.setLastName(personInfo[1]);
                 per.setFirstName(personInfo[2]);
@@ -38,7 +38,7 @@ public class AcceptFile {
                 //incorporate partnerships with the graph
                 Partnership par =
 
-                /*if(line.equals("Person,35,,,,,,,")) {
+                /*if(line.equals("JavaClasses.Person,35,,,,,,,")) {
                     //update this with size of graph to create empty nodes all at once
                 }*/
                 /*else if (line.equals("Partnership,10, , , , , , , ")) {

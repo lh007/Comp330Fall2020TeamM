@@ -1,4 +1,5 @@
-import java.lang.Math;
+package JavaClasses;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
@@ -102,4 +103,8 @@ public class Person {
     public String       getGender()                     { return gender; }
     public void         setGender(String gender)        { this.gender = gender; }
 
+    public String toString(){
+        return "Child of: " + (childOfR == null ? "Unknown" : childOfR) + " " + personID + " " + lastName + " " + firstName + " " + suffix + " " +
+                birthDate + " " + birthPlace + " " + deathDate + " " + deathPlace;
+    }
 }//class end
