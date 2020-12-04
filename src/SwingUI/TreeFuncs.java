@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class TreeFuncs {
     private JButton visualizeTree;
-    private JPanel ViewTree;
+    private JPanel TreeFuncs;
     private JButton editTree;
     private JButton searchTree;
 

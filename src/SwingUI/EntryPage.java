@@ -1,5 +1,8 @@
 package SwingUI;
 
+import JavaClasses.DataPrep;
+import JavaClasses.Person;
+import JavaClasses.Relationship;
 import JavaClasses.TreeGenealogy;
 
 import javax.swing.*;
@@ -14,7 +17,7 @@ public class EntryPage {
     private JTextField promptText;
     private JButton importFileButton;
     private JButton viewExistingButton;
-    private JPanel WelcomePage;
+    private JPanel EntryPage;
 
     private String userFile;
     private TreeGenealogy tg;
@@ -109,18 +112,6 @@ public class EntryPage {
         if (viewExistingButtonFont != null) viewExistingButton.setFont(viewExistingButtonFont);
         viewExistingButton.setText("View Existing Trees");
         EntryScreen.add(viewExistingButton, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        button3 = new JButton();
-        button3.setBackground(new Color(-1));
-        Font button3Font = this.$$$getFont$$$("Consolas", Font.PLAIN, 14, button3.getFont());
-        if (button3Font != null) button3.setFont(button3Font);
-        button3.setText("Button");
-        EntryScreen.add(button3, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        button4 = new JButton();
-        button4.setBackground(new Color(-1));
-        Font button4Font = this.$$$getFont$$$("Consolas", Font.PLAIN, 14, button4.getFont());
-        if (button4Font != null) button4.setFont(button4Font);
-        button4.setText("Button");
-        EntryScreen.add(button4, new com.intellij.uiDesigner.core.GridConstraints(4, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer1 = new com.intellij.uiDesigner.core.Spacer();
         EntryScreen.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(6, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer2 = new com.intellij.uiDesigner.core.Spacer();
