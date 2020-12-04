@@ -80,47 +80,18 @@ public class EntryPage {
      * @noinspection ALL
      */
     private void $$$setupUI$$$() {
-        EntryScreen = new JPanel();
-        EntryScreen.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(7, 1, new Insets(0, 0, 0, 0), -1, -1));
-        EntryScreen.setBackground(new Color(-11688872));
-        EntryScreen.setForeground(new Color(-16777216));
-        EntryScreen.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(-16777216)), "Welcome to the Geneology Tree App!", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION, this.$$$getFont$$$("Consolas", Font.BOLD, 18, EntryScreen.getFont()), new Color(-16777216)));
-        promptText = new JTextField();
-        promptText.setBackground(new Color(-11688872));
-        promptText.setEditable(false);
-        promptText.setEnabled(true);
-        Font promptTextFont = this.$$$getFont$$$("Consolas", Font.BOLD, 16, promptText.getFont());
-        if (promptTextFont != null) promptText.setFont(promptTextFont);
-        promptText.setForeground(new Color(-16777216));
-        promptText.setHorizontalAlignment(0);
-        promptText.setText("What would you like to do?");
-        EntryScreen.add(promptText, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        importFileButton = new JButton();
-        importFileButton.setBackground(new Color(-1));
-        importFileButton.setEnabled(true);
-        Font importFileButtonFont = this.$$$getFont$$$("Consolas", Font.PLAIN, 14, importFileButton.getFont());
-        if (importFileButtonFont != null) importFileButton.setFont(importFileButtonFont);
-        importFileButton.setForeground(new Color(-16777216));
-        importFileButton.setText("Create Tree from File");
+        EntryScreen = new javax.swing.JPanel();
+        EntryScreen.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(7, 1, new java.awt.Insets(0, 0, 0, 0), -1, -1));
+        EntryScreen.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(-16777216)), "Welcome to the Geneology Tree App!", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, this.$$$getFont$$$("Consolas", java.awt.Font.BOLD, 18, EntryScreen.getFont()), new java.awt.Color(-16777216)));
+        promptText = new javax.swing.JTextField();
+        EntryScreen.add(promptText, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new java.awt.Dimension(150, -1), null, 0, false));
+        importFileButton = new javax.swing.JButton();
         EntryScreen.add(importFileButton, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        viewExistingButton = new JButton();
-        viewExistingButton.setBackground(new Color(-1));
-        viewExistingButton.setEnabled(true);
-        Font viewExistingButtonFont = this.$$$getFont$$$("Consolas", Font.PLAIN, 14, viewExistingButton.getFont());
-        if (viewExistingButtonFont != null) viewExistingButton.setFont(viewExistingButtonFont);
-        viewExistingButton.setText("View Existing Trees");
+        viewExistingButton = new javax.swing.JButton();
         EntryScreen.add(viewExistingButton, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        button3 = new JButton();
-        button3.setBackground(new Color(-1));
-        Font button3Font = this.$$$getFont$$$("Consolas", Font.PLAIN, 14, button3.getFont());
-        if (button3Font != null) button3.setFont(button3Font);
-        button3.setText("Button");
+        button3 = new javax.swing.JButton();
         EntryScreen.add(button3, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        button4 = new JButton();
-        button4.setBackground(new Color(-1));
-        Font button4Font = this.$$$getFont$$$("Consolas", Font.PLAIN, 14, button4.getFont());
-        if (button4Font != null) button4.setFont(button4Font);
-        button4.setText("Button");
+        button4 = new javax.swing.JButton();
         EntryScreen.add(button4, new com.intellij.uiDesigner.core.GridConstraints(4, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer1 = new com.intellij.uiDesigner.core.Spacer();
         EntryScreen.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(6, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
@@ -131,26 +102,26 @@ public class EntryPage {
     /**
      * @noinspection ALL
      */
-    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
+    private java.awt.Font $$$getFont$$$(String fontName, int style, int size, java.awt.Font currentFont) {
         if (currentFont == null) return null;
         String resultName;
         if (fontName == null) {
             resultName = currentFont.getName();
         } else {
-            Font testFont = new Font(fontName, Font.PLAIN, 10);
+            java.awt.Font testFont = new java.awt.Font(fontName, java.awt.Font.PLAIN, 10);
             if (testFont.canDisplay('a') && testFont.canDisplay('1')) {
                 resultName = fontName;
             } else {
                 resultName = currentFont.getName();
             }
         }
-        return new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
+        return new java.awt.Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
     }
 
     /**
      * @noinspection ALL
      */
-    public JComponent $$$getRootComponent$$$() {
+    public javax.swing.JComponent $$$getRootComponent$$$() {
         return EntryScreen;
     }
 
