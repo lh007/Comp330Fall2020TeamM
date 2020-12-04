@@ -1,13 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="SwingUI.TreeEdit">
-  <grid id="27dc6" row-count="1" column-count="1" layout-manager="GridLayoutManager">
+  <grid id="27dc6" binding="TreeEdit" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
-      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
     </constraints>
-    <properties/>
-    <border type="none"/>
-    <children/>
+    <properties>
+      <background color="-5997967"/>
+    </properties>
+    <border type="line" title="Edit Tree" title-position="3">
+      <font name="Consolas" size="20" style="1"/>
+      <title-color color="-16777216"/>
+      <color color="-16777216"/>
+    </border>
+    <children>
+      <component id="dcf52" class="javax.swing.JButton" binding="addPerson">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-2960686"/>
+          <font name="Consolas" size="16" style="0"/>
+          <text value="Add Person"/>
+          <toolTipText value="Add a new person to the existing tree"/>
+        </properties>
+      </component>
+      <component id="295df" class="javax.swing.JButton" binding="addRelationship">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-2960686"/>
+          <font name="Consolas" size="16" style="0"/>
+          <text value="Add Relationship"/>
+          <toolTipText value="Add a new relationship between two existing people"/>
+        </properties>
+      </component>
+      <component id="b5e2e" class="javax.swing.JButton" binding="removePerson">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-2960686"/>
+          <font name="Consolas" size="16" style="0"/>
+          <text value="Remove Person"/>
+          <toolTipText value="Remove an existing person from the tree"/>
+        </properties>
+      </component>
+      <component id="2bcf0" class="javax.swing.JButton" binding="editRelationship">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-2960686"/>
+          <font name="Consolas" size="16" style="0"/>
+          <text value="Edit Relationship"/>
+          <toolTipText value="Change the status of an existing relationship"/>
+        </properties>
+      </component>
+      <hspacer id="6c19">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="d4ad4">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+    </children>
   </grid>
 </form>
