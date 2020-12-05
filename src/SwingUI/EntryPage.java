@@ -20,7 +20,7 @@ public class EntryPage {
     private JPanel EntryPage;
 
     private String userFile;
-    private TreeGenealogy tg;
+    private static TreeGenealogy tg;
 
     public EntryPage() {
         // Adds a listener for button push "import file"
@@ -57,6 +57,10 @@ public class EntryPage {
         String treeFile = (userFile);
         TreeGenealogy t = new TreeGenealogy(treeFile);
         tg = t;
+    }
+
+    public static TreeGenealogy getTree() {
+        return tg;
     }
 
     public static void main(String[] args) {

@@ -5,14 +5,17 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 
 import JavaClasses.TreeGenealogy;
+import JavaClasses.Person;
+import JavaClasses.Relationship;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.text.BadLocationException;
 
-public class TreeSearch {
+public class TreeSearch extends EntryPage {
     private JPanel TreeSearch;
     private JPanel SearchOptions;
     private JButton personButton;
@@ -42,17 +45,21 @@ public class TreeSearch {
     private JButton backButton;
     private JButton backButton1;
     private JTextPane searchTextPane;
-    private TreeGenealogy tg;
-    private static final String defaultFamilyTree = "FamilyTreeInputTextFileV2.txt";
-    private JTextArea textArea;
+    private JPanel ConsolePage;
+    private JScrollPane consoleScroll;
+    private JTextArea consoleArea;
+    private JButton closeBtn;
     private PrintStream standardOut;
+    private String rPID;
 
+    //for TreeSearch to switch pages
     CardLayout newCL = new CardLayout(0, 0);
 
     public TreeSearch() {
-        textArea = new JTextArea(50, 10);
-        textArea.setEditable(false);
-        PrintStream printStream = new PrintStream(new CustomOutputStream(textArea));
+        /*
+        consoleArea.setEditable(false);
+
+        PrintStream printStream = new PrintStream(new CustomOutputStream(consoleArea));
 
         // keeps reference of standard output stream
         standardOut = System.out;
@@ -60,12 +67,14 @@ public class TreeSearch {
         // re-assigns standard output stream and error output stream
         System.setOut(printStream);
         System.setErr(printStream);
+        */
 
         //Use CardLayout to switch between Pages
         TreeSearch.setLayout(newCL);
         TreeSearch.add(SearchOptions, "Search Options");
         TreeSearch.add(PersonSearch, "Person Search");
         TreeSearch.add(RelationshipSearch, "Relationship Search");
+        TreeSearch.add(ConsolePage, "Console");
         newCL.show(TreeSearch, "Search Options");
 
         //Search to person search page btn
@@ -98,27 +107,90 @@ public class TreeSearch {
                 newCL.show(TreeSearch, "Search Options");
             }
         });
-        //gets person info by pID
-        pIDField.addActionListener(new ActionListener() {
+
+        //back btn for console page (add functionality so that it will clear console each time X is clicked)
+        closeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String getPID = pIDField.getText();
-                //return
-                //needs to take the input and send to get pID of person
+                try {
+                    consoleArea.getDocument().remove(0,
+                            consoleArea.getDocument().getLength());
+                    newCL.show(TreeSearch, "Search Options");
+                } catch (BadLocationException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        // take out expressions from search and use private to get back into search
+        searchPerson.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                final String printToConsole;
+                if (pIDField != null) {
+                    pIDField.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            try {
+                                String getPID = pIDField.getText();
+                                System.out.println("Hello world");
+                                //System.out.println(tg.searchPerson(getPID));
+                            } catch (Exception k) {
+                                System.out.println("ERROR INPUT: " + pIDField + " is not valid.");
+
+                            }
+                        }
+                    });
+                } else if (firstNameField != null) { //gets person info by First name
+                    firstNameField.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            try {
+                                String getFirstName = firstNameField.getText();
+                                System.out.println("hello World");
+                                //System.out.println(tg.searchFirstName(getFirstName));
+                                firstNameField.getDocument().remove(0,
+                                        firstNameField.getDocument().getLength());
+                            } catch (Exception j) {
+                                System.out.println("ERROR INPUT: " + firstNameField + " is not valid.");
+
+                            }
+                        }
+                    });
+                } else if (lastNameField != null) {  //get person info by Last name
+                    lastNameField.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            try {
+                                String getLastName = lastNameField.getText();
+                                System.out.println(getTree().searchLastName(getLastName));
+                            } catch (Exception i) {
+                                System.out.println("ERROR INPUT: " + lastNameField + " is not valid.");
+
+                            }
+                        }
+                    });
+                }
+                newCL.show(TreeSearch, "Console");
             }
         });
 
-        //gets person info by First name
-
-        //get person info by Last name
 
         //gets rID for a relationship
+        rIDField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String getRID = rIDField.getText();
+
+            }
+        });
 
         //gets pID for the relationship
         relationshipPIDField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String getPID = relationshipPIDField.getText();
+                String getRPID = relationshipPIDField.getText();
+                rPID = getRPID;
+
 
                 //needs to take the input and send to get pID of person
             }
@@ -133,16 +205,23 @@ public class TreeSearch {
                     case 0: //Does nothing
                         break;
                     case 1: //mother
+                        //Relationship r = new Relationship(rPID);
+                        //System.out.println(r.getParents());
                         break;
                     case 2: //father
+                        System.out.println(getTree().searchLastName(rPID));
                         break;
                     case 3: //grandparents
+                        System.out.println(getTree().getGrandParents(rPID));
                         break;
                     case 4: //child
+                        System.out.println(getTree().searchLastName(rPID));
                         break;
                     case 5: //partner
+                        System.out.println(getTree().searchLastName(rPID));
                         break;
                     case 6: //cousin
+                        System.out.println(getTree().searchLastName(rPID));
                         break;
                     default:
                         break;
@@ -157,25 +236,25 @@ public class TreeSearch {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        String treeFile = (args.length == 1 ? args[0] : defaultFamilyTree);
     }
 
     //prints console to jtextarea
+    /*
     public class CustomOutputStream extends OutputStream {
-        private JTextArea textArea;
+        private JTextArea consoleArea;
 
-        public CustomOutputStream(JTextArea textArea) {
-            this.textArea = textArea;
+        public CustomOutputStream(JTextArea consoleArea) {
+            this.consoleArea = consoleArea;
         }
 
         @Override
         public void write(int b) throws IOException {
             // redirects data to the text area
-            textArea.append(String.valueOf((char) b));
+            consoleArea.append(String.valueOf((char) b));
             // scrolls the text area to the end of data
-            textArea.setCaretPosition(textArea.getDocument().getLength());
+            consoleArea.setCaretPosition(consoleArea.getDocument().getLength());
         }
-    }
+    } */
 
     {
 // GUI initializer generated by IntelliJ IDEA GUI Designer
@@ -226,7 +305,7 @@ public class TreeSearch {
         TreeSearch.add(PersonSearch, "Card2");
         searchForAPersonTextPane = new JTextPane();
         searchForAPersonTextPane.setBackground(new Color(-2760988));
-        searchForAPersonTextPane.setEditable(true);
+        searchForAPersonTextPane.setEditable(false);
         Font searchForAPersonTextPaneFont = this.$$$getFont$$$(null, Font.BOLD, 24, searchForAPersonTextPane.getFont());
         if (searchForAPersonTextPaneFont != null) searchForAPersonTextPane.setFont(searchForAPersonTextPaneFont);
         searchForAPersonTextPane.setForeground(new Color(-16777216));
@@ -241,6 +320,7 @@ public class TreeSearch {
         PersonSearch.add(spacer5, new com.intellij.uiDesigner.core.GridConstraints(9, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         useFirstOrLastTextPane = new JTextPane();
         useFirstOrLastTextPane.setBackground(new Color(-2760988));
+        useFirstOrLastTextPane.setEditable(false);
         Font useFirstOrLastTextPaneFont = this.$$$getFont$$$(null, -1, 20, useFirstOrLastTextPane.getFont());
         if (useFirstOrLastTextPaneFont != null) useFirstOrLastTextPane.setFont(useFirstOrLastTextPaneFont);
         useFirstOrLastTextPane.setForeground(new Color(-16777216));
@@ -252,6 +332,7 @@ public class TreeSearch {
         PersonSearch.add(firstNameField, new com.intellij.uiDesigner.core.GridConstraints(4, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(170, 30), null, 0, false));
         firstTextArea = new JTextArea();
         firstTextArea.setBackground(new Color(-2760988));
+        firstTextArea.setEditable(false);
         firstTextArea.setForeground(new Color(-16777216));
         firstTextArea.setText("first");
         PersonSearch.add(firstTextArea, new com.intellij.uiDesigner.core.GridConstraints(3, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_SOUTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 25), null, 0, false));
@@ -259,6 +340,7 @@ public class TreeSearch {
         PersonSearch.add(pIDField, new com.intellij.uiDesigner.core.GridConstraints(4, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         usePIDTextArea = new JTextArea();
         usePIDTextArea.setBackground(new Color(-2760988));
+        usePIDTextArea.setEditable(false);
         Font usePIDTextAreaFont = this.$$$getFont$$$(null, -1, 20, usePIDTextArea.getFont());
         if (usePIDTextAreaFont != null) usePIDTextArea.setFont(usePIDTextAreaFont);
         usePIDTextArea.setForeground(new Color(-16777216));
@@ -266,11 +348,13 @@ public class TreeSearch {
         PersonSearch.add(usePIDTextArea, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_SOUTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
         lastTextArea = new JTextArea();
         lastTextArea.setBackground(new Color(-2760988));
+        lastTextArea.setEditable(false);
         lastTextArea.setForeground(new Color(-16777216));
         lastTextArea.setText("last");
         PersonSearch.add(lastTextArea, new com.intellij.uiDesigner.core.GridConstraints(5, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_SOUTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 25), null, 0, false));
         pIDTextArea = new JTextArea();
         pIDTextArea.setBackground(new Color(-2760988));
+        pIDTextArea.setEditable(false);
         pIDTextArea.setForeground(new Color(-16777216));
         pIDTextArea.setText("pID");
         PersonSearch.add(pIDTextArea, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_SOUTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 25), null, 0, false));
@@ -285,6 +369,7 @@ public class TreeSearch {
         RelationshipSearch.add(relationshipPIDField, new com.intellij.uiDesigner.core.GridConstraints(5, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         searchForARelationshipTextPane = new JTextPane();
         searchForARelationshipTextPane.setBackground(new Color(-2760988));
+        searchForARelationshipTextPane.setEditable(false);
         Font searchForARelationshipTextPaneFont = this.$$$getFont$$$(null, Font.BOLD, 24, searchForARelationshipTextPane.getFont());
         if (searchForARelationshipTextPaneFont != null)
             searchForARelationshipTextPane.setFont(searchForARelationshipTextPaneFont);
@@ -296,6 +381,7 @@ public class TreeSearch {
         RelationshipSearch.add(searchRelationship, new com.intellij.uiDesigner.core.GridConstraints(9, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         useRIDTextArea = new JTextArea();
         useRIDTextArea.setBackground(new Color(-2760988));
+        useRIDTextArea.setEditable(false);
         Font useRIDTextAreaFont = this.$$$getFont$$$(null, -1, 20, useRIDTextArea.getFont());
         if (useRIDTextAreaFont != null) useRIDTextArea.setFont(useRIDTextAreaFont);
         useRIDTextArea.setForeground(new Color(-16777216));
@@ -303,6 +389,7 @@ public class TreeSearch {
         RelationshipSearch.add(useRIDTextArea, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_SOUTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
         findRelationshipToATextArea = new JTextArea();
         findRelationshipToATextArea.setBackground(new Color(-2760988));
+        findRelationshipToATextArea.setEditable(false);
         Font findRelationshipToATextAreaFont = this.$$$getFont$$$(null, -1, 20, findRelationshipToATextArea.getFont());
         if (findRelationshipToATextAreaFont != null)
             findRelationshipToATextArea.setFont(findRelationshipToATextAreaFont);
@@ -329,16 +416,19 @@ public class TreeSearch {
         RelationshipSearch.add(spacer8, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         pIDTextPane = new JTextPane();
         pIDTextPane.setBackground(new Color(-2760988));
+        pIDTextPane.setEditable(false);
         pIDTextPane.setForeground(new Color(-16777216));
         pIDTextPane.setText("pID");
         RelationshipSearch.add(pIDTextPane, new com.intellij.uiDesigner.core.GridConstraints(4, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_SOUTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 25), null, 0, false));
         rIDTextPane = new JTextPane();
         rIDTextPane.setBackground(new Color(-2760988));
+        rIDTextPane.setEditable(false);
         rIDTextPane.setForeground(new Color(-16777216));
         rIDTextPane.setText("rID");
         RelationshipSearch.add(rIDTextPane, new com.intellij.uiDesigner.core.GridConstraints(4, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_SOUTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 25), null, 0, false));
         chooseARelationshipTextPane = new JTextPane();
         chooseARelationshipTextPane.setBackground(new Color(-2760988));
+        chooseARelationshipTextPane.setEditable(false);
         chooseARelationshipTextPane.setForeground(new Color(-16777216));
         chooseARelationshipTextPane.setText("Choose a relationship");
         RelationshipSearch.add(chooseARelationshipTextPane, new com.intellij.uiDesigner.core.GridConstraints(6, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_SOUTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 25), null, 0, false));
@@ -349,6 +439,20 @@ public class TreeSearch {
         backButton1 = new JButton();
         backButton1.setText("back");
         RelationshipSearch.add(backButton1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ConsolePage = new JPanel();
+        ConsolePage.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
+        ConsolePage.setBackground(new Color(-2760988));
+        TreeSearch.add(ConsolePage, "Card4");
+        consoleScroll = new JScrollPane();
+        consoleScroll.setBackground(new Color(-2760988));
+        ConsolePage.add(consoleScroll, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        consoleArea = new JTextArea();
+        consoleArea.setBackground(new Color(-2760988));
+        consoleArea.setForeground(new Color(-16777216));
+        consoleScroll.setViewportView(consoleArea);
+        closeBtn = new JButton();
+        closeBtn.setText("New Search");
+        ConsolePage.add(closeBtn, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_EAST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
