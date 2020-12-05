@@ -17,7 +17,6 @@ public class EntryPage {
     private JTextField promptText;
     private JButton importFileButton;
     private JButton viewExistingButton;
-    private JPanel EntryPage;
 
     private String userFile;
     private TreeGenealogy tg;
