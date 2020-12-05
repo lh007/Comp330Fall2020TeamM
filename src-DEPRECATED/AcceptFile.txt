@@ -1,0 +1,57 @@
+import java.util.*;
+import java.io.*;
+
+public class AcceptFile {
+    // Each line of file is formatted as follows:
+// Person,FamilyName,GivenName,Suffix,DOB,BirthPlace,DOD,DeathPlace,Parents
+// if a piece of info is not known or present, there will be a blank
+// ex. Person,FamilyName,GivenName, ,DOB,BirthPlace, , ,Parents
+
+    //currently, this method adds all people to the graph
+    public void readFile(String filename) {
+        Scanner fileScanner;
+        String line=" ";
+        String[] lineInfo=null;
+        GraphType<String> familyTree=new GraphType<>();
+        try {
+            fileScanner=new Scanner(new File(filename));
+            while(fileScanner.hasNext()) {
+                line=fileScanner.nextLine();
+
+                // !WAY TO COLLECT DATA! //
+                // Person //
+                lineInfo=line.split(",");
+                familyTree.addPerson(personInfo[0]);
+                Person per = familyTree.getPerson(personInfo[0]);
+                per.setPersonID(personInfo[0]);
+                per.setLastName(personInfo[1]);
+                per.setFirstName(personInfo[2]);
+                per.setSuffix(personInfo[3]);
+                per.setBirthDate(personInfo[4]);
+                per.setBirthPlace(personInfo[5]);
+                per.setDeathDate(personInfo[6]);
+                per.setDeathPlace(personInfo[7]);
+                per.setParentRelationID(personInfo[8]);
+
+                // Partnership //
+                lineInfo=line.split(",");
+                //incorporate partnerships with the graph
+                Partnership par =
+
+                /*if(line.equals("Person,35,,,,,,,")) {
+                    //update this with size of graph to create empty nodes all at once
+                }*/
+                /*else if (line.equals("Partnership,10, , , , , , , ")) {
+                    lineInfo=line.split(",");
+                }*/
+                /*else if (line.equals(Children,,,,,,,,)){
+                    lineInfo=line.split(",");
+                }*/
+            }
+        } catch (IOException e) {
+            System.out.println("File not found");
+        }
+    }
+}
+
+
