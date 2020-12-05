@@ -29,6 +29,7 @@
           <foreground color="-16777216"/>
           <horizontalAlignment value="0"/>
           <text value="What would you like to do?"/>
+          <toolTipText value=""/>
         </properties>
       </component>
       <component id="20944" class="javax.swing.JButton" binding="importFileButton">

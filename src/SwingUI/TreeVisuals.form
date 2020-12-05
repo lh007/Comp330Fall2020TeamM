@@ -13,6 +13,27 @@
       <title-color color="-16777216"/>
       <color color="-16777216"/>
     </border>
-    <children/>
+    <children>
+      <scrollpane id="b9b9a">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-5997967"/>
+          <foreground color="-5997967"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="2b5ce" class="javax.swing.JTextArea" binding="p1P2TextArea" default-binding="true">
+            <constraints/>
+            <properties>
+              <background color="-5997967"/>
+              <editable value="false"/>
+              <text value=""/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
+    </children>
   </grid>
 </form>

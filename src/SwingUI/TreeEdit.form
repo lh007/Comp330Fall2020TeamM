@@ -13,7 +13,7 @@
       <color color="-16777216"/>
     </border>
     <children>
-      <grid id="1ea95" binding="RootCard" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="1ea95" binding="RootCard" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <card name="rootCard"/>
@@ -26,7 +26,44 @@
           <title-color color="-16777216"/>
           <color color="-16777216"/>
         </border>
-        <children/>
+        <children>
+          <component id="6417d" class="javax.swing.JButton" binding="b_addPerson">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-2960686"/>
+              <font name="Consolas" size="16" style="0"/>
+              <text value="Add New Person"/>
+            </properties>
+          </component>
+          <component id="677ab" class="javax.swing.JButton" binding="b_addRelationship">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-2960686"/>
+              <font name="Consolas" size="16" style="0"/>
+              <text value="Add New Relationship"/>
+            </properties>
+          </component>
+          <component id="1d5d2" class="javax.swing.JButton" binding="b_removePerson">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Button"/>
+            </properties>
+          </component>
+          <component id="a73e9" class="javax.swing.JButton" binding="b_editRelationship">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Button"/>
+            </properties>
+          </component>
+        </children>
       </grid>
       <grid id="2ad63" binding="AddPerson_Card" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
