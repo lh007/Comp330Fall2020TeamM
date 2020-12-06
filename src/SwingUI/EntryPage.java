@@ -21,6 +21,7 @@ public class EntryPage {
 
     private String userFile;
     private static TreeGenealogy tg;
+    private static Person per;
 
     public EntryPage() {
         // Adds a listener for button push "import file"
@@ -54,6 +55,7 @@ public class EntryPage {
             userFile = selectedFile.getAbsolutePath();
             System.out.println("Selected file: " + userFile);
         }
+
         String treeFile = (userFile);
         TreeGenealogy t = new TreeGenealogy(treeFile);
         tg = t;
