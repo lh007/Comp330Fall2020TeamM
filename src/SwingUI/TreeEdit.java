@@ -1027,6 +1027,7 @@ public class TreeEdit {
         b_addRelationship.setToolTipText("Add a new relationship between two existing people");
         RootCard.add(b_addRelationship, new com.intellij.uiDesigner.core.GridConstraints(4, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         b_updatePartnership = new JButton();
+        b_updatePartnership.setBackground(new Color(-855310));
         Font b_updatePartnershipFont = this.$$$getFont$$$("Consolas", Font.PLAIN, 16, b_updatePartnership.getFont());
         if (b_updatePartnershipFont != null) b_updatePartnership.setFont(b_updatePartnershipFont);
         b_updatePartnership.setText("Update Partnership");
@@ -1052,7 +1053,7 @@ public class TreeEdit {
         AddPerson = new JPanel();
         AddPerson.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(9, 5, new Insets(0, 0, 0, 0), -1, -1));
         AddPerson.setBackground(new Color(-3040113));
-        AddPerson.setPreferredSize(new Dimension(700, 500));
+        AddPerson.setPreferredSize(new Dimension(700, 700));
         TreeEdit.add(AddPerson, "add_person");
         AddPerson.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(-16777216)), "Add A New Person", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.BELOW_TOP, this.$$$getFont$$$("Consolas", Font.BOLD, 20, AddPerson.getFont()), new Color(-16777216)));
         ap_cancel = new JButton();
@@ -1234,7 +1235,7 @@ public class TreeEdit {
         AddRelationship = new JPanel();
         AddRelationship.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(15, 3, new Insets(0, 0, 0, 0), -1, -1));
         AddRelationship.setBackground(new Color(-3040113));
-        AddRelationship.setPreferredSize(new Dimension(700, 600));
+        AddRelationship.setPreferredSize(new Dimension(700, 700));
         TreeEdit.add(AddRelationship, "add_relation");
         AddRelationship.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(-16777216)), "Add A New Relationship", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.BELOW_TOP, this.$$$getFont$$$("Consolas", Font.BOLD, 20, AddRelationship.getFont()), new Color(-16777216)));
         ar_cancel = new JButton();
@@ -1386,7 +1387,7 @@ public class TreeEdit {
         UpdatePartnership = new JPanel();
         UpdatePartnership.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(9, 4, new Insets(0, 0, 0, 0), -1, -1));
         UpdatePartnership.setBackground(new Color(-3040113));
-        UpdatePartnership.setPreferredSize(new Dimension(600, 400));
+        UpdatePartnership.setPreferredSize(new Dimension(700, 700));
         TreeEdit.add(UpdatePartnership, "update_partnership");
         UpdatePartnership.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(-16777216)), "Update A Partnership", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.BELOW_TOP, this.$$$getFont$$$("Consolas", Font.BOLD, 20, UpdatePartnership.getFont()), new Color(-16777216)));
         up_cancel = new JButton();

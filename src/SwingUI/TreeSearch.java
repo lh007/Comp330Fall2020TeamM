@@ -81,14 +81,7 @@ public class TreeSearch {
 
         consoleArea.setEditable(false);
 
-        PrintStream printStream = new PrintStream(new CustomOutputStream(consoleArea));
 
-        // keeps reference of standard output stream
-        standardOut = System.out;
-
-        // re-assigns standard output stream and error output stream
-        System.setOut(printStream);
-        System.setErr(printStream);
 
 
         //Use CardLayout to switch between Pages
@@ -162,6 +155,7 @@ public class TreeSearch {
             @Override
             public void actionPerformed(ActionEvent e) {
                 newCL.show(TreeSearch, "Console");
+                overridePrint();
                 if (!pIDField.getText().isEmpty()) {
                     try {
                         getPID = pIDField.getText().toUpperCase();
@@ -195,6 +189,7 @@ public class TreeSearch {
         personRelationshipChoice.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
+                overridePrint();
                 TreeGenealogy tg = getTree();
                 Map<String, Person> people = getPeople();
                 Map<String, Relationship> relation = getRelations();
@@ -255,6 +250,7 @@ public class TreeSearch {
             @Override
             public void actionPerformed(ActionEvent e) {
                 newCL.show(TreeSearch, "Console");
+                overridePrint();
                 if (!rIDField.getText().isEmpty()) {
                     try {
                         getRID = rIDField.getText().toUpperCase();
@@ -323,6 +319,16 @@ public class TreeSearch {
         return treeSearch;
     }
 
+    public void overridePrint() {
+        PrintStream printStream = new PrintStream(new CustomOutputStream(consoleArea));
+
+        // keeps reference of standard output stream
+        standardOut = System.out;
+
+        // re-assigns standard output stream and error output stream
+        System.setOut(printStream);
+        System.setErr(printStream);
+    }
     //prints console to jtextarea
 
     public class CustomOutputStream extends OutputStream {
