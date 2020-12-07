@@ -1,5 +1,7 @@
 package SwingUI;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -17,7 +19,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.text.BadLocationException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import static SwingUI.TreeFuncs.getTreeFuncs;
 
@@ -63,8 +68,10 @@ public class TreeSearch extends EntryPage {
     private String getPID;
     private String getRID;
     private String getLastName;
-    private static Person p = new Person();
-    private static Relationship r = new Relationship();
+    private int selection;
+    private List<Person> a;
+   // private static Person p = new Person();
+    //private static Relationship r = new Relationship();
 
     //for TreeSearch to switch pages
     CardLayout newCL = new CardLayout(0, 0);
@@ -156,25 +163,24 @@ public class TreeSearch extends EntryPage {
                 newCL.show(TreeSearch, "Console");
                 if (!pIDField.getText().isEmpty()) {
                     try {
-                        String s = pIDField.getText();
-                        //System.out.println(s);
-                        System.out.println(getTree().getPerson(s));
+                        getPID = pIDField.getText().toUpperCase();
+                        System.out.println(getTree().getPerson(getPID));
                     } catch (Exception i) {
-                        System.out.println("ERROR INPUT: " + pIDField.getText() + " is not valid.");
+                        System.out.println("ERROR INPUT: " + getPID + " is not valid.");
                     }
                 } else if (!firstNameField.getText().isEmpty()) { //gets person info by First name
                     try {
                         getFirstName = firstNameField.getText();
                         System.out.println(getTree().searchFirstName(getFirstName));
                     } catch (Exception j) {
-                        System.out.println("ERROR INPUT: " + firstNameField.getText() + " is not valid.");
+                        System.out.println("ERROR INPUT: " + getFirstName + " is not valid.");
                     }
                 } else if (!lastNameField.getText().isEmpty()) {  //get person info by Last name
                     try {
                         getLastName = lastNameField.getText();
                         System.out.println(getTree().searchLastName(getLastName));
                     } catch (Exception k) {
-                        System.out.println("ERROR INPUT: " + lastNameField.getText() + " is not valid.");
+                        System.out.println("ERROR INPUT: " + getLastName + " is not valid.");
                     }
                 }
                 //clears the textfields
@@ -185,6 +191,64 @@ public class TreeSearch extends EntryPage {
             }
         });
 
+        personRelationshipChoice.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                TreeGenealogy tg = getTree();
+                Map<String, Person> people = getPeople();
+                Map<String, Relationship> relation = getRelations();
+                rPID = relationshipPIDField.getText().toUpperCase();
+                selection = personRelationshipChoice.getSelectedIndex();
+                switch (selection) {
+                    case 0: //Does nothing
+                        break;
+                    case 1: //parents
+                        a = new ArrayList<>(getTree().getParents(rPID));
+                        break;
+                    case 2: //grandparents
+                        a = new ArrayList<>(getTree().getGrandParents(rPID));
+                        break;
+                        /*
+                    case 3: //child
+                        a = new ArrayList<>();
+                        for (String r : tg.getPerson(rPID).getRelations()) {
+                            System.out.println(people.get(rPID).getRelations());
+                            System.out.println(r);
+                            Relationship w = getTree().getRelationship(r);
+                            if (w != null && w.getChildren() != null) {
+                                a.addAll(w.getChildren());
+                            }
+                        }
+                        break;
+                    case 4: //partner
+                        a = new ArrayList<>();
+                        System.out.println("Starting p search" + rPID);
+                        if (getTree().getPerson(rPID).getRelations() != null) {
+                            System.out.println("Relation not null" + rPID);
+                            System.out.println(getTree().getPerson(rPID).getRelations());
+                            for (String r : getTree().getPerson(rPID).getRelations()) {
+                                System.out.println("Checking relation" + r);
+                                Relationship w = getTree().getRelationship(r);
+                                if (w != null && w.getParents() != null) {
+                                    System.out.println("w not null and parents present");
+                                    for (Person p : w.getParents()) {
+                                        System.out.println("Checking parent" + p.getPersonID());
+                                        if (p.getPersonID() != rPID) {
+                                            a.add(p);
+                                            System.out.println("Adding" + p.getPersonID());
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        break; */
+                    default:
+                        break;
+                }
+            }
+        });
+
+
         //Search function for Relationships (rID, Relationships to pID)
         searchRelationship.addActionListener(new ActionListener() {
             @Override
@@ -192,40 +256,59 @@ public class TreeSearch extends EntryPage {
                 newCL.show(TreeSearch, "Console");
                 if (!rIDField.getText().isEmpty()) {
                     try {
-                        getRID = rIDField.getText();
+                        getRID = rIDField.getText().toUpperCase();
                         System.out.println(getTree().getRelationship(getRID));
                     } catch (Exception l) {
-                        System.out.println("ERROR INPUT: " + rIDField.getText() + " is not valid.");
+                        System.out.println("ERROR INPUT: " + getRID + " is not valid.");
                     }
                 } else if (!relationshipPIDField.getText().isEmpty()) {
                     try {
-                        rPID = relationshipPIDField.getText();
-                        int selection = personRelationshipChoice.getSelectedIndex();
-                        switch (selection) {
-                            case 0: //Does nothing
-                                break;
-                            case 1: //parents
-                                System.out.println(getTree().getParents(rPID));
-                                break;
-                            case 3: //grandparents
-                                System.out.println(getTree().getGrandParents(rPID));
-                                break;
-                            case 4: //child
-                                System.out.println(getTree().searchLastName(rPID));
-                                break;
-                            case 5: //partner
-                                System.out.println(getTree().getPerson(rPID).getRelations());
-                                break;
-                            default:
-                                break;
-                        }
+                        if (selection == 1) { //parents
+                            try {
+                                if (a.isEmpty()) {
+                                    throw new IOException();
+                                }
+                                System.out.println(a);
+                            } catch (Exception l) {
+                                System.out.println("ERROR INPUT: " + rPID + " has no parents.");
+                            }
+                        } else if (selection == 2) { //grandparents
+                            try {
+                                if (a.isEmpty()) {
+                                    throw new IOException();
+                                }
+                                System.out.println(a);
+                            } catch (Exception l) {
+                                System.out.println("ERROR INPUT: " + rPID + " has no grandparents.");
+                            }
+                        } /*
+                        else if (selection == 3) { //child
+                            try {
+                                if (a.isEmpty()) {
+                                    throw new IOException();
+                                }
+                                System.out.println(a);
+                            } catch (Exception l) {
+                                System.out.println("ERROR INPUT: " + rPID + " has no children.");
+                            }
+                        } else if (selection == 4) { //spouse
+                            try {
+                                if (a.isEmpty()) {
+                                    throw new IOException();
+                                }
+                                System.out.println(a);
+                            } catch (Exception l) {
+                                System.out.println("ERROR INPUT: " + rPID + " has no spouse.");
+                            }
+                        } */
                     } catch (Exception m) {
-                        System.out.println("ERROR INPUT: " + relationshipPIDField.getText() + " is not valid.");
+                        System.out.println("ERROR INPUT: " + relationshipPIDField.getText().toUpperCase() + " is not valid.");
                     }
                 }
                 //clears the textfields
                 rIDField.setText("");
                 relationshipPIDField.setText("");
+                personRelationshipChoice.setSelectedIndex(0);
             }
         });
 
@@ -495,10 +578,7 @@ public class TreeSearch extends EntryPage {
                 resultName = currentFont.getName();
             }
         }
-        Font font = new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
-        boolean isMac = System.getProperty("os.name", "").toLowerCase(Locale.ENGLISH).startsWith("mac");
-        Font fontWithFallback = isMac ? new Font(font.getFamily(), font.getStyle(), font.getSize()) : new StyleContext().getFont(font.getFamily(), font.getStyle(), font.getSize());
-        return fontWithFallback instanceof FontUIResource ? fontWithFallback : new FontUIResource(fontWithFallback);
+        return new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
     }
 
     /**
