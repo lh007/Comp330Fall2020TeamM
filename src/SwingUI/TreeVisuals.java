@@ -81,7 +81,6 @@ public class TreeVisuals extends EntryPage {
     public static void setTreeVisuals(JFrame frame) {
         treeVisuals = frame;
     }
-
     public static JFrame getTreeVisuals() {
         return treeVisuals;
     }
