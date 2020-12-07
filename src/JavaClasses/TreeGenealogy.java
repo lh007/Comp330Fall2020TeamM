@@ -1,7 +1,5 @@
 package JavaClasses;
 
-import JavaClasses.DataPrep;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
@@ -92,8 +90,8 @@ public class TreeGenealogy{
                 if (!rExcluded.contains(s)){
                     Relationship r = relations.get(s);
 
-                    Person femaleParent = r.getFemaleParent();
-                    Person maleParent = r.getMaleParent();
+                    Person femaleParent = r.getFirstParent();
+                    Person maleParent = r.getSecondParent();
 
                     if (depth == 0 && femaleParent != null && femaleParent != p) {
                         femaleParent.relationChain.add("0 w");
@@ -154,8 +152,8 @@ public class TreeGenealogy{
                     Relationship r = relations.get(s);
 
                     //give the "in law" title to the married people if one exists
-                    Person femaleParent = r.getFemaleParent();
-                    Person maleParent = r.getMaleParent();
+                    Person femaleParent = r.getFirstParent();
+                    Person maleParent = r.getSecondParent();
                     if (femaleParent != null && femaleParent != p){
                         String marriageHierarchy = String.valueOf(depth) + " " + currentHierarchy.substring(0, currentHierarchy.length() - 1) + "d -";
                         femaleParent.relationChain.add(marriageHierarchy);
