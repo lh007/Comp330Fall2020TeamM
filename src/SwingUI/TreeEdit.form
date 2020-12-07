@@ -931,7 +931,7 @@
               <text value="New End Date:"/>
             </properties>
           </component>
-          <component id="ffe66" class="javax.swing.JLabel">
+          <component id="ffe66" class="javax.swing.JLabel" binding="new_location_label">
             <constraints>
               <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -978,9 +978,9 @@
               <toolTipText value="MM/DD/YYYY"/>
             </properties>
           </component>
-          <component id="3d144" class="javax.swing.JTextField" binding="dates_note">
+          <component id="3d144" class="javax.swing.JTextField" binding="date_note">
             <constraints>
-              <grid row="3" column="2" row-span="2" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+              <grid row="3" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
@@ -1000,6 +1000,20 @@
               <enabled value="false"/>
               <font name="Consolas" size="14" style="0"/>
               <text value="Submit"/>
+            </properties>
+          </component>
+          <component id="9a6a1" class="javax.swing.JTextField" binding="input_note">
+            <constraints>
+              <grid row="4" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-3040113"/>
+              <editable value="false"/>
+              <enabled value="false"/>
+              <font name="Consolas" size="14" style="3"/>
+              <text value="Leave unwanted 'New' fields blank"/>
             </properties>
           </component>
         </children>

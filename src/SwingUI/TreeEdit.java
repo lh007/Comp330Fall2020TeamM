@@ -101,9 +101,11 @@ public class TreeEdit {
     private JTextField new_enddate_input;
     private JTextField new_location_input;
     private JLabel new_startdate_label;
-    private JTextField dates_note;
+    private JTextField date_note;
     private JLabel new_enddate_label;
     private JButton up_submit;
+    private JLabel new_location_label;
+    private JTextField input_note;
 
     private JRadioButton buttonSelected;
     private CardLayout cardLayout = new CardLayout();
@@ -848,7 +850,126 @@ public class TreeEdit {
         check_button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                TreeGenealogy familyTree = getTree();
+                Map<String,Person> people = getPeople();
+                Map<String,Relationship> relations = getRelations();
+                String rID = rID_input.getText().toUpperCase();
+                String pID_1 = pID_marr1_input.getText().toUpperCase();
+                String pID_2 = pID_marr2_input.getText().toUpperCase();
+                // Make sure none of the fields are empty
+                // Error: There is an empty field
+                if (rID.equals("")) {
+                    System.out.println("Error: rID is a requried field");
+                    return;
+                }
+                if (pID_1.equals("")) {
+                    System.out.println("Error: First Person pID is a required field");
+                    return;
+                }
+                if (pID_2.equals("")) {
+                    System.out.println("Error: Second Person pID is a required field");
+                    return;
+                }
+                // Make sure the IDs exist
+                // Error: An entered ID does not exist
+                if (!relations.containsKey(rID)) {
+                    System.out.println("Error: Cannot find relationship from entered rID. " +
+                            "Ensure the value is correct, or create a new relationship first");
+                    return;
+                }
+                if (!people.containsKey(pID_1)) {
+                    System.out.println("Error: Cannot find First Person. Ensure the pID value is correct, " +
+                            "or create a new person first");
+                    return;
+                }
+                if (!people.containsKey(pID_2)) {
+                    System.out.println("Error: Cannot find Second Person. Ensure the pID value is correct, " +
+                            "or create a new person first");
+                    return;
+                }
+                // Make sure both people have a common partnership
+                Person per1 = people.get(pID_1);
+                Person per2 = people.get(pID_2);
+                Set<String> p1_rel = per1.getRelations();
+                Set<String> p2_rel = per2.getRelations();
+                boolean rel_exists = false;
+                for (String s : p1_rel) {
+                    if (p2_rel.contains(s)) {
+                        rel_exists = true;
+                        break;
+                    }
+                }
+                // Error: Partnership does not exist
+                if (!rel_exists) {
+                    System.out.println("Error: No partnership found between Person One and Person Two. " +
+                            "Ensure the values are correct, or create a new relationship first");
+                    return;
+                }
+                /* Checkpoint: IDs are valid and a partnership was found */
+                System.out.println("Relationship found");
+                /* Get the current values of the relationship */
+                Relationship r = familyTree.getRelationship(rID);
+                String curr_start = r.getStartDate();
+                String curr_end = r.getEndDate();
+                String curr_location = r.getMarriageLocation();
+                // Display the current values on the screen
+                current_startdate_label.setEnabled(true);
+                current_startdate_text.setEnabled(true);
+                current_startdate_text.setText(curr_start);
+                current_enddate_label.setEnabled(true);
+                current_enddate_text.setEnabled(true);
+                current_enddate_text.setText(curr_end);
+                current_location_label.setEnabled(true);
+                current_location_text.setEnabled(true);
+                current_location_text.setText(curr_location);
+                /* Allow user to input new values and submit changed */
+                new_startdate_label.setEnabled(true);
+                new_startdate_input.setEnabled(true);
+                new_enddate_label.setEnabled(true);
+                new_enddate_input.setEnabled(true);
+                new_location_label.setEnabled(true);
+                new_location_input.setEnabled(true);
+                date_note.setEnabled(true);
+                input_note.setEnabled(true);
+                up_submit.setEnabled(true);
+                // Input checks and relationship update will be done in Submit listener
+            }
+        });
+        /* Action Listener for Submit button */
+        up_submit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TreeGenealogy familyTree = getTree();
+                Map<String,Person> people = getPeople();
+                Map<String,Relationship> relations = getRelations();
+                String rID = rID_input.getText().toUpperCase();
+                Relationship r = relations.get(rID);
+                String new_start = new_startdate_input.getText();
+                String new_end = new_enddate_input.getText();
+                String new_location = new_location_input.getText();
+                // Error: incorrect date formats
+                if (new_start.length() != 10) {
+                    System.out.println("Error: Incorrect format for Start Date");
+                    return;
+                }
+                if (new_end.length() != 10) {
+                    System.out.println("Error: Incorrect format for End Date");
+                    return;
+                }
+                // Check for values to change
+                if (!new_start.equals("")) {
+                    r.setStartDate(new_start);
+                }
+                if (!new_end.equals("")) {
+                    r.setEndDate(new_end);
+                }
+                if (!new_location.equals("")) {
+                    r.setMarriageLocation(new_location);
+                }
+                System.out.println("Relationship successfully updated: ");
+                System.out.println("Start Date: " + r.getStartDate());
+                System.out.println("End Date: " + r.getEndDate());
+                System.out.println("Marriage Location: " + r.getMarriageLocation());
             }
         });
     }
