@@ -1,9 +1,7 @@
 package JavaClasses;
 
-import JavaClasses.Person;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * JavaClasses.JavaClasses.Relationship class stores parents and a list of children of the JavaClasses.JavaClasses.Person class.
@@ -14,8 +12,8 @@ public class Relationship {
         Key/ID, femaleParent, maleParent, startDate, endDate, marriageLocation
      */
     private String relationshipID   = null;
-    private Person femaleParent     = null;
-    private Person maleParent       = null;
+    private Person firstParent      = null;
+    private Person secondParent     = null;
     private String startDate        = null;
     private String endDate          = null;
     private String marriageLocation = null;
@@ -26,12 +24,12 @@ public class Relationship {
     public Relationship() {}
 
     public Relationship(
-            String relationshipID, Person femaleParent, Person maleParent,
+            String relationshipID, Person firstParent, Person secondParent,
             String startDate, String endDate, String marriageLocation
     ){
         this.relationshipID   = relationshipID;
-        this.femaleParent     = femaleParent;
-        this.maleParent       = maleParent;
+        this.firstParent = firstParent;
+        this.secondParent = secondParent;
         this.startDate        = startDate;
         this.endDate          = endDate;
         this.marriageLocation = marriageLocation;
@@ -40,19 +38,19 @@ public class Relationship {
     public String   getRelationshipID()                         { return relationshipID; }
     public void     setRelationshipID(String relationshipID)    { this.relationshipID = relationshipID; }
 
-    public Person   getFemaleParent()                           { return femaleParent; }
-    public void     setFemaleParent(Person femaleParent)        { this.femaleParent = femaleParent; }
+    public Person getFirstParent()                           { return firstParent; }
+    public void setFirstParent(Person firstParent)        { this.firstParent = firstParent; }
 
-    public Person   getMaleParent()                             { return maleParent; }
-    public void     setMaleParent(Person maleParent)            { this.maleParent = maleParent; }
+    public Person getSecondParent()                             { return secondParent; }
+    public void setSecondParent(Person secondParent)            { this.secondParent = secondParent; }
 
 
     public List<Person> getParents(){
         List<Person> result = new ArrayList<>();
-        if (femaleParent != null)
-            result.add(femaleParent);
-        if (maleParent != null)
-            result.add(maleParent);
+        if (firstParent != null)
+            result.add(firstParent);
+        if (secondParent != null)
+            result.add(secondParent);
 
         return result;
     }
@@ -76,6 +74,46 @@ public class Relationship {
         for(Person p : children){
             addChild(p);
         }
+    }
+
+    public String toString(){
+        String s = "rID: " + relationshipID + "\n";
+        s += "First Parent: " + (firstParent == null ? "Unknown" : firstParent.toString()) + "\n";
+        s += "Second Parent: " + (secondParent == null ? "Unknown" : secondParent.toString()) + "\n";
+        if (children.size()==0) {
+            s += "No children found" + "\n";
+        }
+        else {
+            for(Person p : children){
+                s += "Child: " + p.toString() + "\n";
+            }
+        }
+        s += "Start Date: " + (startDate == null ? "Unknown" : startDate) + "\n";
+        s += "End Date: " + (endDate == null ? "N/A or Unknown" : endDate) + "\n";
+        s += "Marriage Location: " + (marriageLocation == null ? "N/A or Unknown" : marriageLocation) + "\n";
+        return s;
+    }
+
+    // to be used in Swing class TreeEdit for adding a child relationship
+    public String childSelect_toString(Person child) {
+        String s = "rID: " + relationshipID + "\n";
+        s += "First Parent: " + (firstParent == null ? "Unknown" :
+                (firstParent.getFirstName() + "" + firstParent.getLastName() + "" + firstParent.getSuffix())) + "\n";
+        s += "Second Parent: " + (secondParent == null ? "Unknown" :
+                (secondParent.getFirstName() + "" + secondParent.getLastName() + "" + secondParent.getSuffix())) + "\n";
+        s += "Child: " + child.getFirstName() + "" + child.getLastName() + "" + child.getSuffix() + "\n";
+        return s;
+    }
+
+    // to be used in Swing class TreeEdit for adding a partner relationship
+    public String partnerSelect_toString() {
+        String s = "rID: " + relationshipID + "\n";
+        s += "First Partner: " + firstParent + "\n";
+        s += "Second Partner: " + secondParent + "\n";
+        s += "Start Date: " + (startDate == null ? "Unknown" : startDate) + "\n";
+        s += "End Date: " + (endDate == null ? "N/A or Unknown" : endDate) + "\n";
+        s += "Marriage Location: " + (marriageLocation == null ? "N/A or Unknown" : marriageLocation) + "\n";
+        return s;
     }
 
 }

@@ -104,7 +104,14 @@ public class Person {
     public void         setGender(String gender)        { this.gender = gender; }
 
     public String toString(){
-        return "Child of: " + (childOfR == null ? "Unknown" : childOfR) + " " + personID + " " + lastName + " " + firstName + " " + suffix + " " +
-                birthDate + " " + birthPlace + " " + deathDate + " " + deathPlace;
+        String s = "pID: " + personID + "\n";
+        s += "First Name: " + firstName + "\n";
+        s += "Last Name: " + lastName + "\n";
+        s += "Suffix: " + (suffix == null ? "N/A" : suffix) + "\n";
+        s += "Birth Date: " + birthDate + "\n";
+        s += "Birth Place: " + (birthPlace == null ? "Unknown" : birthPlace) + "\n";
+        s += "Death Date: " + (deathDate == null ? "N/A or Unknown" : deathDate) + "\n";
+        s += "Death Place: " + (deathPlace == null ? "N/A or Unknown" : deathPlace) + "\n";
+        return s;
     }
 }//class end
