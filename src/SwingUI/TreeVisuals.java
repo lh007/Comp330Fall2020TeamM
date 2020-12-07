@@ -1,12 +1,25 @@
 package SwingUI;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+
+import JavaClasses.DataPrep;
+import JavaClasses.Person;
+import JavaClasses.Relationship;
+import JavaClasses.TreeGenealogy;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.Locale;
+import java.util.Map;
 
 import static SwingUI.TreeFuncs.getTreeFuncs;
 
@@ -15,12 +28,24 @@ public class TreeVisuals extends EntryPage {
     private JPanel TreeVisuals;
     private JButton back_btn;
     private JTextArea printVisuals;
+    private PrintStream standardOut;
 
-    //TreeGenealogy tg = getTree();
-    //Map<String,People> mp = getPeople();
-    //Map<String,Relationship> mr = getRelations();
+    private TreeGenealogy tg = getTree();
+    private Map<String, Person> mp = getPeople();
+    private Map<String, Relationship> mr = getRelations();
 
     public TreeVisuals() {
+
+        printVisuals.setEditable(false);
+
+        PrintStream printStream = new PrintStream(new TreeVisuals.CustomOutputStream(printVisuals));
+
+        // keeps reference of standard output stream
+        standardOut = System.out;
+
+        // re-assigns standard output stream and error output stream
+        System.setOut(printStream);
+        System.setErr(printStream);
 
         // Back button listener
         back_btn.addActionListener(new ActionListener() {
@@ -31,11 +56,32 @@ public class TreeVisuals extends EntryPage {
                 treeFuncs.setVisible(true);
             }
         });
+
+        System.out.println(tg.printEntireFamilyTree());
+    }
+
+    //prints console to jtextarea
+
+    public class CustomOutputStream extends OutputStream {
+        private JTextArea printVisuals;
+
+        public CustomOutputStream(JTextArea printVisuals) {
+            this.printVisuals = printVisuals;
+        }
+
+        @Override
+        public void write(int b) throws IOException {
+            // redirects data to the text area
+            printVisuals.append(String.valueOf((char) b));
+            // scrolls the text area to the end of data
+            printVisuals.setCaretPosition(printVisuals.getDocument().getLength());
+        }
     }
 
     public static void setTreeVisuals(JFrame frame) {
         treeVisuals = frame;
     }
+
     public static JFrame getTreeVisuals() {
         return treeVisuals;
     }
@@ -60,9 +106,24 @@ public class TreeVisuals extends EntryPage {
      */
     private void $$$setupUI$$$() {
         TreeVisuals = new JPanel();
-        TreeVisuals.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        TreeVisuals.setBackground(new Color(-5997967));
+        TreeVisuals.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
+        TreeVisuals.setBackground(new Color(-11500380));
+        TreeVisuals.setPreferredSize(new Dimension(600, 400));
         TreeVisuals.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(-16777216)), "Visualize Tree", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.BELOW_TOP, this.$$$getFont$$$("Consolas", Font.BOLD, 20, TreeVisuals.getFont()), new Color(-16777216)));
+        back_btn = new JButton();
+        Font back_btnFont = this.$$$getFont$$$("Consolas", Font.PLAIN, 14, back_btn.getFont());
+        if (back_btnFont != null) back_btn.setFont(back_btnFont);
+        back_btn.setText("Back");
+        TreeVisuals.add(back_btn, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final com.intellij.uiDesigner.core.Spacer spacer1 = new com.intellij.uiDesigner.core.Spacer();
+        TreeVisuals.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        final JScrollPane scrollPane1 = new JScrollPane();
+        TreeVisuals.add(scrollPane1, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        printVisuals = new JTextArea();
+        printVisuals.setBackground(new Color(-1));
+        Font printVisualsFont = this.$$$getFont$$$("Monospaced", -1, -1, printVisuals.getFont());
+        if (printVisualsFont != null) printVisuals.setFont(printVisualsFont);
+        scrollPane1.setViewportView(printVisuals);
     }
 
     /**

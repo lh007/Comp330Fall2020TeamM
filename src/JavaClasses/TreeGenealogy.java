@@ -243,6 +243,16 @@ public class TreeGenealogy{
     public Relationship getRelationship(String rID) { return (relations.containsKey(rID) ? relations.get(rID) : null); }
     public Person       getPerson(String pID)       { return (people.containsKey(pID) ? people.get(pID) : null); }
 
+    public String printEntireFamilyTree(){
+        String result = "";
+
+        for(Relationship r : relations.values()){
+            for(String s: r.printVisuals())
+                result += s + "\n";
+            result += "\n";
+        }
+        return result;
+    }
 
 
     /*
