@@ -24,9 +24,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import static SwingUI.EntryPage.*;
 import static SwingUI.TreeFuncs.getTreeFuncs;
 
-public class TreeSearch extends EntryPage {
+public class TreeSearch {
     private static JFrame treeSearch;
     private JPanel TreeSearch;
     private JPanel SearchOptions;
@@ -70,7 +71,7 @@ public class TreeSearch extends EntryPage {
     private String getLastName;
     private int selection;
     private List<Person> a;
-   // private static Person p = new Person();
+    // private static Person p = new Person();
     //private static Relationship r = new Relationship();
 
     //for TreeSearch to switch pages
@@ -578,7 +579,10 @@ public class TreeSearch extends EntryPage {
                 resultName = currentFont.getName();
             }
         }
-        return new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
+        Font font = new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
+        boolean isMac = System.getProperty("os.name", "").toLowerCase(Locale.ENGLISH).startsWith("mac");
+        Font fontWithFallback = isMac ? new Font(font.getFamily(), font.getStyle(), font.getSize()) : new StyleContext().getFont(font.getFamily(), font.getStyle(), font.getSize());
+        return fontWithFallback instanceof FontUIResource ? fontWithFallback : new FontUIResource(fontWithFallback);
     }
 
     /**

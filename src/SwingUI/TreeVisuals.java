@@ -21,9 +21,10 @@ import java.io.PrintStream;
 import java.util.Locale;
 import java.util.Map;
 
+import static SwingUI.EntryPage.*;
 import static SwingUI.TreeFuncs.getTreeFuncs;
 
-public class TreeVisuals extends EntryPage {
+public class TreeVisuals {
     private static JFrame treeVisuals;
     private JPanel TreeVisuals;
     private JButton back_btn;
