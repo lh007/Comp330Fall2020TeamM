@@ -208,6 +208,7 @@ public class TreeSearch extends EntryPage {
                     case 2: //grandparents
                         a = new ArrayList<>(getTree().getGrandParents(rPID));
                         break;
+                        /*
                     case 3: //child
                         a = new ArrayList<>();
                         for (String r : tg.getPerson(rPID).getRelations()) {
@@ -240,7 +241,7 @@ public class TreeSearch extends EntryPage {
                                 }
                             }
                         }
-                        break;
+                        break; */
                     default:
                         break;
                 }
@@ -280,7 +281,8 @@ public class TreeSearch extends EntryPage {
                             } catch (Exception l) {
                                 System.out.println("ERROR INPUT: " + rPID + " has no grandparents.");
                             }
-                        } else if (selection == 3) { //child
+                        } /*
+                        else if (selection == 3) { //child
                             try {
                                 if (a.isEmpty()) {
                                     throw new IOException();
@@ -298,7 +300,7 @@ public class TreeSearch extends EntryPage {
                             } catch (Exception l) {
                                 System.out.println("ERROR INPUT: " + rPID + " has no spouse.");
                             }
-                        }
+                        } */
                     } catch (Exception m) {
                         System.out.println("ERROR INPUT: " + relationshipPIDField.getText().toUpperCase() + " is not valid.");
                     }
