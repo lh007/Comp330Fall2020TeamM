@@ -1,9 +1,7 @@
 package JavaClasses;
 
-import JavaClasses.Person;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * JavaClasses.JavaClasses.Relationship class stores parents and a list of children of the JavaClasses.JavaClasses.Person class.
@@ -76,6 +74,46 @@ public class Relationship {
         for(Person p : children){
             addChild(p);
         }
+    }
+
+    public String toString(){
+        String s = "rID: " + relationshipID + "\n";
+        s += "Mother: " + (femaleParent == null ? "Unknown" : femaleParent.toString()) + "\n";
+        s += "Father: " + (maleParent == null ? "Unknown" : maleParent.toString()) + "\n";
+        if (children.size()==0) {
+            s += "No children found" + "\n";
+        }
+        else {
+            for(Person p : children){
+                s += "Child: " + p.toString() + "\n";
+            }
+        }
+        s += "Start Date: " + (startDate == null ? "Unknown" : startDate) + "\n";
+        s += "End Date: " + (endDate == null ? "N/A or Unknown" : endDate) + "\n";
+        s += "Marriage Location: " + (marriageLocation == null ? "N/A or Unknown" : marriageLocation) + "\n";
+        return s;
+    }
+
+    // to be used in Swing class TreeEdit for adding a child relationship
+    public String childSelect_toString(Person child) {
+        String s = "rID: " + relationshipID + "\n";
+        s += "Mother: " + (femaleParent == null ? "Unknown" :
+                (femaleParent.getFirstName() + "" + femaleParent.getLastName() + "" + femaleParent.getSuffix())) + "\n";
+        s += "Father: " + (maleParent == null ? "Unknown" :
+                (maleParent.getFirstName() + "" + maleParent.getLastName() + "" + maleParent.getSuffix())) + "\n";
+        s += "Child: " + child.getFirstName() + "" + child.getLastName() + "" + child.getSuffix() + "\n";
+        return s;
+    }
+
+    // to be used in Swing class TreeEdit for adding a partner relationship
+    public String partnerSelect_toString(Person p1, Person p2) {
+        String s = "rID: " + relationshipID + "\n";
+        s += "First Partner: " + (p1).toString() + "\n";
+        s += "Second Partner: " + (p2).toString() + "\n";
+        s += "Start Date: " + (startDate == null ? "Unknown" : startDate) + "\n";
+        s += "End Date: " + (endDate == null ? "N/A or Unknown" : endDate) + "\n";
+        s += "Marriage Location: " + (marriageLocation == null ? "N/A or Unknown" : marriageLocation) + "\n";
+        return s;
     }
 
 }

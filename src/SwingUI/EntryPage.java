@@ -28,6 +28,7 @@ public class EntryPage {
     private String userFile;
     private static TreeGenealogy tg;
     private static Map<String, Person> people;
+    private static Map<String, Relationship> relations;
 
     public EntryPage() {
 
@@ -83,8 +84,16 @@ public class EntryPage {
         return people;
     }
 
-    public static void updatePeople(Map<String, Person> m) {
-        people = m;
+    public static void updatePeople(Map<String, Person> mp) {
+        people = mp;
+    }
+
+    public static Map<String, Relationship> getRelations() {
+        return relations;
+    }
+
+    public static void updateRelations(Map<String, Relationship> mr) {
+        relations = mr;
     }
 
     public static void setEntryPage(JFrame frame) {

@@ -1,20 +1,23 @@
 package SwingUI;
 
 import JavaClasses.Person;
+import JavaClasses.Relationship;
 import JavaClasses.TreeGenealogy;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
+import javax.swing.text.AttributeSet;
 import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
-import static SwingUI.EntryPage.getTree;
-import static SwingUI.EntryPage.updatePeople;
+import static SwingUI.EntryPage.*;
 import static SwingUI.TreeFuncs.getTreeFuncs;
 
 public class TreeEdit {
@@ -49,23 +52,23 @@ public class TreeEdit {
     private JButton ap_submit;
     private JButton ar_cancel;
     private JRadioButton select_partner;
-    private JFormattedTextField pID_mother_input;
-    private JFormattedTextField pID_part1_input;
-    private JFormattedTextField pID_father_input;
-    private JFormattedTextField pID_part2_input;
+    private JTextField pID_mother_input;
+    private JTextField pID_part1_input;
+    private JTextField pID_father_input;
+    private JTextField pID_part2_input;
     private JTextArea reltype_prompt;
     private JButton ar_submit;
     private JRadioButton select_child;
     private JLabel pID_mother_label;
     private JLabel pID_father_label;
-    private JFormattedTextField pID_child_input;
+    private JTextField pID_child_input;
     private JLabel pID_child_label;
     private JLabel pID_part1_label;
     private JLabel startdate_label;
     private JLabel pID_part2_label;
-    private JFormattedTextField startdate_input;
+    private JTextField startdate_input;
     private JLabel enddate_label;
-    private JFormattedTextField enddate_input;
+    private JTextField enddate_input;
     private JButton er_cancel;
     private JFormattedTextField rID_input;
     private JLabel rID_label;
@@ -77,8 +80,16 @@ public class TreeEdit {
     private JLabel pID_p2_label;
     private JTextField birthdate_yyyy;
     private JTextField deathdate_yyyy;
+    private JTextField guide_text;
+    private JTextField required1;
+    private JTextField required2;
+    private JTextField prompt1;
+    private JTextField prompt2;
+    private JLabel location_label;
+    private JTextField location_input;
     private ButtonGroup radioButtons;
 
+    private JRadioButton buttonSelected;
     private CardLayout cardLayout = new CardLayout();
 
     public TreeEdit() {
@@ -137,7 +148,6 @@ public class TreeEdit {
         birthdate_mm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JComboBox c = ((JComboBox) e.getSource());
                 /* Filling in dd ComboBox */
                 int index = birthdate_mm.getSelectedIndex();
                 // January, March, May, July, August, October, December : 31 days
@@ -391,7 +401,203 @@ public class TreeEdit {
         });
 
         /////// CARD: AddRelationship ///////
+        /* Action Listener for Cancel button */
+        ar_cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(TreeEdit,"Edit Options");
+            }
+        });
 
+        /* Action Listener for Select Child */
+        select_child.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pID_part1_label.setEnabled(false);
+                pID_part1_input.setEnabled(false);
+                pID_part2_label.setEnabled(false);
+                pID_part2_input.setEnabled(false);
+                startdate_label.setEnabled(false);
+                startdate_input.setEnabled(false);
+                prompt1.setEnabled(false);
+                enddate_label.setEnabled(false);
+                enddate_input.setEnabled(false);
+                location_label.setEnabled(false);
+                location_input.setEnabled(false);
+                prompt2.setEnabled(false);
+
+                pID_mother_label.setEnabled(true);
+                pID_mother_input.setEnabled(true);
+                pID_father_label.setEnabled(true);
+                pID_father_input.setEnabled(true);
+                pID_child_label.setEnabled(true);
+                pID_child_input.setEnabled(true);
+                ar_submit.setEnabled(true);
+
+                buttonSelected = select_child;
+            }
+        });
+        /* Action Listener for Select Partner */
+        select_partner.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pID_mother_label.setEnabled(false);
+                pID_mother_input.setEnabled(false);
+                pID_father_label.setEnabled(false);
+                pID_father_input.setEnabled(false);
+                pID_child_label.setEnabled(false);
+                pID_child_input.setEnabled(false);
+                ar_submit.setEnabled(false);
+
+                pID_part1_label.setEnabled(true);
+                pID_part1_input.setEnabled(true);
+                pID_part2_label.setEnabled(true);
+                pID_part2_input.setEnabled(true);
+                startdate_label.setEnabled(true);
+                startdate_input.setEnabled(true);
+                prompt1.setEnabled(true);
+                enddate_label.setEnabled(true);
+                enddate_input.setEnabled(true);
+                location_label.setEnabled(true);
+                location_input.setEnabled(true);
+                prompt2.setEnabled(true);
+
+                buttonSelected = select_partner;
+            }
+        });
+        /* Action Listener for Submit button */
+        ar_submit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TreeGenealogy familyTree = getTree(); //method from EntryPage
+                Map<String, Relationship> relations = getRelations(); //method from EntryPage
+                Map<String, Person> people = getPeople(); //method from EntryPage
+                // Child Relationship Selected
+                if (buttonSelected.equals(select_child)) {
+                    String mom_pID = pID_mother_input.getText().toUpperCase(); //ensures "P"
+                    String dad_pID = pID_father_input.getText().toUpperCase(); //ensures "P"
+                    String child_pID = pID_child_input.getText();
+                    if (mom_pID.equals("")) { mom_pID = null; }
+                    if (dad_pID.equals("")) { dad_pID = null; }
+                    if (child_pID.equals("")) { child_pID = null; }
+
+                    // Error for no parents
+                    if (mom_pID==null && dad_pID==null) {
+                        System.out.println("Error: At least one parent must be entered");
+                    }
+                    // Error for no child
+                    else if (child_pID==null) {
+                        System.out.println("Error: A child must be entered");
+                    }
+                    // Check to see if the pID entered exists
+                    else if (!people.containsKey(mom_pID)) {
+                        System.out.println("Error: pID entered for Mother does not exist. Check that the correct value was entered or create a new person first");
+                    }
+                    else if (!people.containsKey(dad_pID)) {
+                        System.out.println("Error: pID entered for Father does not exist. Check that the correct value was entered or create a new person first");
+                    }
+                    else if (!people.containsKey(child_pID)) {
+                        System.out.println("Error: pID entered for Child does not exist. Check that the correct value was entered or create a new person first");
+                    }
+                    // All inputs are valid
+                    else {
+                        // Generate rID
+                        String rID = "";
+                        int x = 1;
+                        String current = "";
+                        boolean found = false;
+                        while (!found) {
+                            current = "R" + String.valueOf(x);
+                            if (relations.containsKey(current)) { //rID already exists
+                                x+=1;
+                                continue; //try again
+                            } else { //found an unused rID
+                                rID = current;
+                                found = true; //break loop
+                            }
+                        }
+
+                        Person child = people.get(child_pID); //Person object for child
+                        // For one-parent relationships
+                        String startDate = null;
+                        String endDate = null;
+                        String marriageLocation = null;
+                        Person femaleParent = null; //use in Relationship constructor if no mom is entered
+                        Person maleParent = null; //use in Relationship constructor if no dad is entered
+
+                        // Child already belongs to a parent relationship
+                        if (child.getChildOfR() != null) {
+                            System.out.println("Error: Entered child already has a parent relationship registered");
+                        }
+                        // Mom entered, dad not entered, no rID would exist
+                        else if (mom_pID != null && dad_pID == null) {
+                            Person mom = people.get(mom_pID); //Person object for mom
+                            child.setChildOfR(rID); //method from Person class, set the child's parent
+                            mom.addRelation(rID); //method from Person class, add the rID to mom's relationships
+                            Relationship r = new Relationship(rID,mom,maleParent,startDate,endDate,marriageLocation);
+                            r.addChild(child); //add the child to the relationship's list of children
+                            relations.put(rID,r); //add to tree's relations
+                            updateRelations(relations); //update the relations global var
+                            System.out.println("Relationship successfully added: " + r.toString());
+                        }
+                        // Dad entered, mom not entered, no rID would exist
+                        else if (dad_pID != null && mom_pID == null) {
+                            Person dad = people.get(dad_pID);
+                            child.setChildOfR(rID);
+                            dad.addRelation(rID);
+                            Relationship r = new Relationship(rID,femaleParent,dad,startDate,endDate,marriageLocation);
+                            r.addChild(child);
+                            relations.put(rID,r);
+                            updateRelations(relations);
+                            System.out.println("Relationship successfully added: " + r.toString());
+                        }
+                        // Both mom and dad entered, rID may or may not exist
+                        else {
+                            Person mom = people.get(mom_pID);
+                            Person dad = people.get(dad_pID);
+                            Set<String> momRelations = mom.getRelations(); //method from Person class
+                            Set<String> dadRelations = dad.getRelations();
+                            boolean changed = false;
+
+                            // Check if a partnership exists between the parents
+                            for (String ID : momRelations) { //traverse through mom's relationships
+                                if (dadRelations.contains(ID)) { //checking for a common relationship in dad's
+                                    rID = ID; //common relationship found
+                                    changed = true;
+                                } else {
+                                    continue; //not found, try again
+                                }
+                            }
+
+                            // No partnership exists
+                            if (!changed) {
+                                System.out.println("Error: No partnership found between entered mother and father. Add a new partnership first");
+                            }
+                            // Partnership exists
+                            else {
+                                Relationship r = relations.get(rID); //pull their relationship from the tree
+                                List<Person> children = r.getChildren(); //method from Person, get their existing children
+                                // The child relationship already exists
+                                if (children.contains(child_pID)) {
+                                    System.out.println("Error: A relationship for the entered parent(s) and child already exists");
+                                }
+                                // The child relationship does not exist
+                                else {
+                                    children.add(child); //Add the child to parents' children list
+                                    child.setChildOfR(rID); //Set the child's parents
+                                    System.out.println("Relationship successfully added: " + r.toString());
+                                }
+                            }
+                        }
+                    } //end processes for valid inputs
+                } //end child select
+
+                // Partner Relationship Selected
+                if (buttonSelected.equals(select_partner)) {
+
+                }
+            }
+        });
     }
 
     public static void setTreeEdit(JFrame frame) {
