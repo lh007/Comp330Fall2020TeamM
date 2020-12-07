@@ -11,12 +11,18 @@ import JavaClasses.TreeGenealogy;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.text.BadLocationException;
+import java.util.Locale;
+
+import static SwingUI.TreeFuncs.getTreeFuncs;
 
 public class TreeSearch extends EntryPage {
+    private static JFrame treeSearch;
     private JPanel TreeSearch;
     private JPanel SearchOptions;
     private JButton personButton;
@@ -88,6 +94,16 @@ public class TreeSearch extends EntryPage {
         //=================================================
         //===================btns==========================
         //=================================================
+
+        //Navigate back to previous form
+        backButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame treeFuncs = getTreeFuncs();
+                getTreeSearch().setVisible(false);
+                treeFuncs.setVisible(true);
+            }
+        });
         //Search to person search page btn
         personButton.addActionListener(new ActionListener() {
             @Override
@@ -183,27 +199,27 @@ public class TreeSearch extends EntryPage {
                     }
                 } else if (!relationshipPIDField.getText().isEmpty()) {
                     try {
-                    rPID = relationshipPIDField.getText();
-                    int selection = personRelationshipChoice.getSelectedIndex();
-                    switch (selection) {
-                        case 0: //Does nothing
-                            break;
-                        case 1: //parents
-                            System.out.println(getTree().getParents(rPID));
-                            break;
-                        case 3: //grandparents
-                            System.out.println(getTree().getGrandParents(rPID));
-                            break;
-                        case 4: //child
-                            System.out.println(getTree().searchLastName(rPID));
-                            break;
-                        case 5: //partner
-                            System.out.println(getTree().getPerson(rPID).getRelations());
-                            break;
-                        default:
-                            break;
+                        rPID = relationshipPIDField.getText();
+                        int selection = personRelationshipChoice.getSelectedIndex();
+                        switch (selection) {
+                            case 0: //Does nothing
+                                break;
+                            case 1: //parents
+                                System.out.println(getTree().getParents(rPID));
+                                break;
+                            case 3: //grandparents
+                                System.out.println(getTree().getGrandParents(rPID));
+                                break;
+                            case 4: //child
+                                System.out.println(getTree().searchLastName(rPID));
+                                break;
+                            case 5: //partner
+                                System.out.println(getTree().getPerson(rPID).getRelations());
+                                break;
+                            default:
+                                break;
                         }
-                    }catch (Exception m){
+                    } catch (Exception m) {
                         System.out.println("ERROR INPUT: " + relationshipPIDField.getText() + " is not valid.");
                     }
                 }
@@ -212,14 +228,15 @@ public class TreeSearch extends EntryPage {
                 relationshipPIDField.setText("");
             }
         });
+
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Tree Search");
-        frame.setContentPane(new TreeSearch().TreeSearch);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+    public static void setTreeSearch(JFrame frame) {
+        treeSearch = frame;
+    }
+
+    public static JFrame getTreeSearch() {
+        return treeSearch;
     }
 
     //prints console to jtextarea
@@ -460,7 +477,10 @@ public class TreeSearch extends EntryPage {
                 resultName = currentFont.getName();
             }
         }
-        return new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
+        Font font = new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
+        boolean isMac = System.getProperty("os.name", "").toLowerCase(Locale.ENGLISH).startsWith("mac");
+        Font fontWithFallback = isMac ? new Font(font.getFamily(), font.getStyle(), font.getSize()) : new StyleContext().getFont(font.getFamily(), font.getStyle(), font.getSize());
+        return fontWithFallback instanceof FontUIResource ? fontWithFallback : new FontUIResource(fontWithFallback);
     }
 
     /**
