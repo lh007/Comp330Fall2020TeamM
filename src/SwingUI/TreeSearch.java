@@ -142,7 +142,7 @@ public class TreeSearch extends EntryPage {
                     try {
                         String s = pIDField.getText();
                         //System.out.println(s);
-                        System.out.println(getTree().getPerson(pIDField.getText()));
+                        System.out.println(getTree().getPerson(s));
                     } catch (Exception i) {
                         System.out.println("ERROR INPUT: " + pIDField.getText() + " is not valid.");
                     }
