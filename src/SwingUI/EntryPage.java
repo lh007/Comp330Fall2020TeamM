@@ -73,7 +73,7 @@ public class EntryPage {
         tg = t;
         Map<String, Person> map = t.getPeople();
         people = map;
-        System.out.print("Successfully created family tree");
+        System.out.print("Successfully created family tree" + "\n");
     }
 
     public static TreeGenealogy getTree() {

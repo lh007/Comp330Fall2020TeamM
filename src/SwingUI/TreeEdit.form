@@ -52,14 +52,14 @@
               <toolTipText value="Add a new relationship between two existing people"/>
             </properties>
           </component>
-          <component id="a73e9" class="javax.swing.JButton" binding="b_editRelationship">
+          <component id="a73e9" class="javax.swing.JButton" binding="b_updatePartnership">
             <constraints>
               <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="Consolas" size="16" style="0"/>
-              <text value="Edit Relationship"/>
-              <toolTipText value="Edit an existing relationship between two people"/>
+              <text value="Update Partnership"/>
+              <toolTipText value="Edit an existing partnership between two people"/>
             </properties>
           </component>
           <component id="8373" class="javax.swing.JButton" binding="root_back">
@@ -107,7 +107,7 @@
         </constraints>
         <properties>
           <background color="-3040113"/>
-          <preferredSize width="600" height="400"/>
+          <preferredSize width="700" height="500"/>
         </properties>
         <border type="line" title="Add A New Person" title-position="3">
           <font name="Consolas" size="20" style="1"/>
@@ -320,7 +320,7 @@
               <editable value="false"/>
               <font name="Consolas" size="14" style="3"/>
               <foreground color="-16777216"/>
-              <text value="Fill in all fields that apply. Leave unknown fields blank"/>
+              <text value="Fill in all fields that apply. Leave unknown fields blank (except Required)"/>
             </properties>
           </component>
           <component id="dfb6b" class="javax.swing.JComboBox" binding="birthdate_dd">
@@ -364,11 +364,6 @@
               <font name="Consolas" size="14" style="0"/>
             </properties>
           </component>
-          <hspacer id="76202">
-            <constraints>
-              <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-          </hspacer>
           <component id="1c94e" class="javax.swing.JButton" binding="ap_submit">
             <constraints>
               <grid row="8" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -378,7 +373,7 @@
               <text value="Submit"/>
             </properties>
           </component>
-          <component id="5c0a8" class="javax.swing.JTextField" binding="required1">
+          <component id="5c0a8" class="javax.swing.JTextField" binding="required3">
             <constraints>
               <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -391,7 +386,7 @@
               <text value="MM/DD/YYYY, Required"/>
             </properties>
           </component>
-          <component id="a24e3" class="javax.swing.JTextField" binding="required2">
+          <component id="a24e3" class="javax.swing.JTextField" binding="required4">
             <constraints>
               <grid row="6" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -401,7 +396,33 @@
               <background color="-3040113"/>
               <editable value="false"/>
               <font name="Consolas" size="14" style="3"/>
-              <text value="MM/DD/YYYY, Required"/>
+              <text value="MM/DD/YYYY"/>
+            </properties>
+          </component>
+          <component id="1949f" class="javax.swing.JTextField" binding="required1">
+            <constraints>
+              <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-3040113"/>
+              <editable value="false"/>
+              <font name="Consolas" size="14" style="3"/>
+              <text value="Required"/>
+            </properties>
+          </component>
+          <component id="9060f" class="javax.swing.JTextField" binding="required2">
+            <constraints>
+              <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-3040113"/>
+              <editable value="false"/>
+              <font name="Consolas" size="14" style="3"/>
+              <text value="Required"/>
             </properties>
           </component>
         </children>
@@ -413,7 +434,7 @@
         </constraints>
         <properties>
           <background color="-3040113"/>
-          <preferredSize width="600" height="478"/>
+          <preferredSize width="700" height="600"/>
         </properties>
         <border type="line" title="Add A New Relationship" title-position="3">
           <font name="Consolas" size="20" style="1"/>
@@ -430,17 +451,18 @@
               <text value="Cancel"/>
             </properties>
           </component>
-          <component id="67b85" class="javax.swing.JLabel" binding="pID_mother_label">
+          <component id="67b85" class="javax.swing.JLabel" binding="pID_parent1_label">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <enabled value="false"/>
               <font name="Consolas" size="14" style="0"/>
-              <text value="Mother pID:"/>
+              <labelFor value="1cb19"/>
+              <text value="First Parent pID:"/>
             </properties>
           </component>
-          <component id="1cb19" class="javax.swing.JTextField" binding="pID_mother_input">
+          <component id="1cb19" class="javax.swing.JTextField" binding="pID_parent1_input">
             <constraints>
               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -452,7 +474,7 @@
               <font name="Consolas" size="14" style="0"/>
             </properties>
           </component>
-          <component id="8ed63" class="javax.swing.JLabel" binding="pID_father_label">
+          <component id="8ed63" class="javax.swing.JLabel" binding="pID_parent2_label">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -460,10 +482,10 @@
               <enabled value="false"/>
               <font name="Consolas" size="14" style="0"/>
               <labelFor value="6979b"/>
-              <text value="Father pID:"/>
+              <text value="Second Parent pID:"/>
             </properties>
           </component>
-          <component id="6979b" class="javax.swing.JTextField" binding="pID_father_input">
+          <component id="6979b" class="javax.swing.JTextField" binding="pID_parent2_input">
             <constraints>
               <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -536,17 +558,18 @@
               <text value="Child pID:"/>
             </properties>
           </component>
-          <component id="e7345" class="javax.swing.JLabel" binding="pID_part1_label">
+          <component id="e7345" class="javax.swing.JLabel" binding="pID_partner1_label">
             <constraints>
               <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <enabled value="false"/>
               <font name="Consolas" size="14" style="0"/>
+              <labelFor value="6b366"/>
               <text value="Partner1 pID:"/>
             </properties>
           </component>
-          <component id="6b366" class="javax.swing.JTextField" binding="pID_part1_input">
+          <component id="6b366" class="javax.swing.JTextField" binding="pID_partner1_input">
             <constraints>
               <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -559,7 +582,7 @@
               <font name="Consolas" size="14" style="0"/>
             </properties>
           </component>
-          <component id="58555" class="javax.swing.JLabel" binding="pID_part2_label">
+          <component id="58555" class="javax.swing.JLabel" binding="pID_partner2_label">
             <constraints>
               <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -581,7 +604,7 @@
               <text value="Start Date:"/>
             </properties>
           </component>
-          <component id="123e2" class="javax.swing.JTextField" binding="pID_part2_input">
+          <component id="123e2" class="javax.swing.JTextField" binding="pID_partner2_input">
             <constraints>
               <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -687,6 +710,7 @@
             <properties>
               <enabled value="false"/>
               <font name="Consolas" size="14" style="0"/>
+              <labelFor value="58a55"/>
               <text value="Marriage Location:"/>
             </properties>
           </component>
@@ -703,71 +727,35 @@
           </component>
         </children>
       </grid>
-      <grid id="3fac4" binding="EditRelationship" layout-manager="GridLayoutManager" row-count="7" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="3fac4" binding="UpdatePartnership" layout-manager="GridLayoutManager" row-count="9" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <card name="edit_relation"/>
+          <card name="update_partnership"/>
         </constraints>
         <properties>
           <background color="-3040113"/>
           <preferredSize width="600" height="400"/>
         </properties>
-        <border type="line" title="Edit A Relationship" title-position="3">
+        <border type="line" title="Update A Partnership" title-position="3">
           <font name="Consolas" size="20" style="1"/>
           <title-color color="-16777216"/>
           <color color="-16777216"/>
         </border>
         <children>
-          <component id="1dada" class="javax.swing.JButton" binding="er_cancel">
+          <component id="1dada" class="javax.swing.JButton" binding="up_cancel">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="Consolas" size="14" style="0"/>
               <text value="Cancel"/>
             </properties>
           </component>
-          <vspacer id="8b32c">
-            <constraints>
-              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-            </constraints>
-          </vspacer>
-          <vspacer id="b00ca">
-            <constraints>
-              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-            </constraints>
-          </vspacer>
-          <hspacer id="1bd1">
-            <constraints>
-              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-          </hspacer>
           <hspacer id="685cf">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
           </hspacer>
-          <component id="2b431" class="javax.swing.JLabel" binding="rID_label">
-            <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <font name="Consolas" size="14" style="0"/>
-              <labelFor value="56ba9"/>
-              <text value="rID:"/>
-            </properties>
-          </component>
-          <component id="723dd" class="javax.swing.JLabel" binding="current_rel">
-            <constraints>
-              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <enabled value="false"/>
-              <font name="Consolas" size="14" style="0"/>
-              <labelFor value="53bb1"/>
-              <text value="Current Relationship:"/>
-            </properties>
-          </component>
           <hspacer id="b72bf">
             <constraints>
               <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -778,9 +766,81 @@
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
           </hspacer>
-          <component id="56ba9" class="javax.swing.JFormattedTextField" binding="rID_input">
+          <component id="8b7f4" class="javax.swing.JButton" binding="check_button">
             <constraints>
-              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Consolas" size="14" style="0"/>
+              <text value="Check"/>
+            </properties>
+          </component>
+          <component id="6593c" class="javax.swing.JLabel" binding="current_location_label">
+            <constraints>
+              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <enabled value="false"/>
+              <font name="Consolas" size="14" style="0"/>
+              <labelFor value="5e901"/>
+              <text value="Current Marriage Location:"/>
+            </properties>
+          </component>
+          <component id="5c98f" class="javax.swing.JLabel" binding="current_enddate_label">
+            <constraints>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <enabled value="false"/>
+              <font name="Consolas" size="14" style="0"/>
+              <labelFor value="257a9"/>
+              <text value="Current End Date:"/>
+            </properties>
+          </component>
+          <component id="446b6" class="javax.swing.JLabel" binding="current_startdate_label">
+            <constraints>
+              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <enabled value="false"/>
+              <font name="Consolas" size="14" style="0"/>
+              <labelFor value="2bc0f"/>
+              <text value="Current Start Date:"/>
+            </properties>
+          </component>
+          <component id="76364" class="javax.swing.JLabel" binding="pID_marr1_label">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Consolas" size="14" style="0"/>
+              <labelFor value="2301d"/>
+              <text value="First Person pID:"/>
+            </properties>
+          </component>
+          <component id="2b431" class="javax.swing.JLabel" binding="rID_label">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Consolas" size="14" style="0"/>
+              <labelFor value="e36ff"/>
+              <text value="rID:"/>
+            </properties>
+          </component>
+          <component id="8965a" class="javax.swing.JLabel" binding="pID_marr2_label">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Consolas" size="14" style="0"/>
+              <labelFor value="16029"/>
+              <text value="Second Person pID:"/>
+            </properties>
+          </component>
+          <component id="e36ff" class="javax.swing.JTextField" binding="rID_input">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
@@ -788,10 +848,58 @@
               <font name="Consolas" size="14" style="0"/>
             </properties>
           </component>
-          <component id="53bb1" class="javax.swing.JTextArea" binding="current_rel_text">
+          <component id="2301d" class="javax.swing.JTextField" binding="pID_marr1_input">
             <constraints>
-              <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="50"/>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font name="Consolas" size="14" style="0"/>
+            </properties>
+          </component>
+          <component id="16029" class="javax.swing.JTextField" binding="pID_marr2_input">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font name="Consolas" size="14" style="0"/>
+            </properties>
+          </component>
+          <component id="2bc0f" class="javax.swing.JTextField" binding="current_startdate_text">
+            <constraints>
+              <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-3040113"/>
+              <editable value="false"/>
+              <enabled value="false"/>
+              <font name="Consolas" size="14" style="0"/>
+              <toolTipText value=""/>
+            </properties>
+          </component>
+          <component id="257a9" class="javax.swing.JTextField" binding="current_enddate_text">
+            <constraints>
+              <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-3040113"/>
+              <editable value="false"/>
+              <enabled value="false"/>
+              <font name="Consolas" size="14" style="0"/>
+              <toolTipText value=""/>
+            </properties>
+          </component>
+          <component id="5e901" class="javax.swing.JTextField" binding="current_location_text">
+            <constraints>
+              <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
             <properties>
@@ -801,44 +909,97 @@
               <font name="Consolas" size="14" style="0"/>
             </properties>
           </component>
-          <component id="76364" class="javax.swing.JLabel" binding="pID_p1_label">
+          <component id="5ba98" class="javax.swing.JLabel" binding="new_startdate_label">
             <constraints>
-              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <enabled value="false"/>
               <font name="Consolas" size="14" style="0"/>
-              <labelFor value="585cf"/>
-              <text value="First Person pID:"/>
+              <labelFor value="d549e"/>
+              <text value="New Start Date:"/>
             </properties>
           </component>
-          <component id="585cf" class="javax.swing.JFormattedTextField" binding="pID_p1_input">
+          <component id="b99a0" class="javax.swing.JLabel" binding="new_enddate_label">
             <constraints>
-              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+              <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <enabled value="false"/>
+              <font name="Consolas" size="14" style="0"/>
+              <labelFor value="6e264"/>
+              <text value="New End Date:"/>
+            </properties>
+          </component>
+          <component id="ffe66" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <enabled value="false"/>
+              <font name="Consolas" size="14" style="0"/>
+              <labelFor value="1455e"/>
+              <text value="New Marriage Location:"/>
+            </properties>
+          </component>
+          <component id="d549e" class="javax.swing.JTextField" binding="new_startdate_input">
+            <constraints>
+              <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
             <properties>
+              <enabled value="false"/>
               <font name="Consolas" size="14" style="0"/>
+              <toolTipText value="MM/DD/YYYY"/>
             </properties>
           </component>
-          <component id="8965a" class="javax.swing.JLabel" binding="pID_p2_label">
+          <component id="6e264" class="javax.swing.JTextField" binding="new_enddate_input">
             <constraints>
-              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <font name="Consolas" size="14" style="0"/>
-              <labelFor value="ad5c7"/>
-              <text value="Second Person pID:"/>
-            </properties>
-          </component>
-          <component id="ad5c7" class="javax.swing.JFormattedTextField" binding="pID_p2_input">
-            <constraints>
-              <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+              <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
             <properties>
+              <enabled value="false"/>
               <font name="Consolas" size="14" style="0"/>
+              <toolTipText value="MM/DD/YYYY"/>
+            </properties>
+          </component>
+          <component id="1455e" class="javax.swing.JTextField" binding="new_location_input">
+            <constraints>
+              <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <enabled value="false"/>
+              <font name="Consolas" size="14" style="0"/>
+              <toolTipText value="MM/DD/YYYY"/>
+            </properties>
+          </component>
+          <component id="3d144" class="javax.swing.JTextField" binding="dates_note">
+            <constraints>
+              <grid row="3" column="2" row-span="2" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-3040113"/>
+              <editable value="false"/>
+              <enabled value="false"/>
+              <font name="Consolas" size="14" style="3"/>
+              <text value="Dates must be in the format MM/DD/YYYY"/>
+            </properties>
+          </component>
+          <component id="7533b" class="javax.swing.JButton" binding="up_submit">
+            <constraints>
+              <grid row="8" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <enabled value="false"/>
+              <font name="Consolas" size="14" style="0"/>
+              <text value="Submit"/>
             </properties>
           </component>
         </children>
