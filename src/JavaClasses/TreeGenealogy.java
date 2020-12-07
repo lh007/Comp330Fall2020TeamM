@@ -1,12 +1,7 @@
 package JavaClasses;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.*;
 
 public class TreeGenealogy{
     private Map<String, Relationship> relations = new HashMap<>();
@@ -15,6 +10,7 @@ public class TreeGenealogy{
     private int initialRelationshipCapacity = 0;
 
     public Map<String, Person> getPeople() { return people; }
+    public Map<String, Relationship> getRelations() { return relations; }
     /*
      *  FAMILY TITLES SECTION
      */
@@ -247,6 +243,16 @@ public class TreeGenealogy{
     public Relationship getRelationship(String rID) { return (relations.containsKey(rID) ? relations.get(rID) : null); }
     public Person       getPerson(String pID)       { return (people.containsKey(pID) ? people.get(pID) : null); }
 
+    public String printEntireFamilyTree(){
+        String result = "";
+
+        for(Relationship r : relations.values()){
+            for(String s: r.printVisuals())
+                result += s + "\n";
+            result += "\n";
+        }
+        return result;
+    }
 
 
     /*
