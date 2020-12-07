@@ -30,8 +30,6 @@ public class Person {
 
     private String gender = null;
 
-
-
     /*
      * Values will be restricted to m, f, s, d and backups (if gender unkown) p and c for parent/child
      * Also, once the chain begins traversing down (s or d), it must only continue subsequent

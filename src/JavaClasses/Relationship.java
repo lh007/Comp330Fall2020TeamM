@@ -115,5 +115,4 @@ public class Relationship {
         s += "Marriage Location: " + (marriageLocation == null ? "N/A or Unknown" : marriageLocation) + "\n";
         return s;
     }
-
 }

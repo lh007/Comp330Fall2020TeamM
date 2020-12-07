@@ -1,6 +1,5 @@
 package SwingUI;
 
-import JavaClasses.DataPrep;
 import JavaClasses.Person;
 import JavaClasses.Relationship;
 import JavaClasses.TreeGenealogy;
@@ -69,10 +68,12 @@ public class EntryPage {
             System.out.println("Selected file: " + userFile);
         }
         String treeFile = (userFile);
-        TreeGenealogy t = new TreeGenealogy(treeFile);
+        TreeGenealogy t = new TreeGenealogy(treeFile); //method calls: TG: loadData(String dataFileName)
+        Map<String, Person> pm = t.getPeople(); //TG: getPeople()
+        Map<String, Relationship> rm = t.getRelations(); //TG: getRelations()
         tg = t;
-        Map<String, Person> map = t.getPeople();
-        people = map;
+        people = pm;
+        relations = rm;
         System.out.print("Successfully created family tree" + "\n");
     }
 
