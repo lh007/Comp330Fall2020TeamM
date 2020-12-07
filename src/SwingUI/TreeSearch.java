@@ -22,6 +22,7 @@ import javax.swing.text.BadLocationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import static SwingUI.TreeFuncs.getTreeFuncs;
 
@@ -68,12 +69,9 @@ public class TreeSearch extends EntryPage {
     private String getRID;
     private String getLastName;
     private int selection;
-    private List a;
-    private List b;
-    private String[] c;
-    private List d;
-    private static Person p = new Person();
-    private static Relationship r = new Relationship();
+    private List<Person> a;
+   // private static Person p = new Person();
+    //private static Relationship r = new Relationship();
 
     //for TreeSearch to switch pages
     CardLayout newCL = new CardLayout(0, 0);
@@ -196,22 +194,52 @@ public class TreeSearch extends EntryPage {
         personRelationshipChoice.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
+                TreeGenealogy tg = getTree();
+                Map<String, Person> people = getPeople();
+                Map<String, Relationship> relation = getRelations();
                 rPID = relationshipPIDField.getText().toUpperCase();
                 selection = personRelationshipChoice.getSelectedIndex();
                 switch (selection) {
                     case 0: //Does nothing
                         break;
                     case 1: //parents
-                        a = new ArrayList(getTree().getParents(rPID));
+                        a = new ArrayList<>(getTree().getParents(rPID));
                         break;
-                    case 3: //grandparents
-                        b = new ArrayList(getTree().getGrandParents(rPID));
+                    case 2: //grandparents
+                        a = new ArrayList<>(getTree().getGrandParents(rPID));
                         break;
-                    case 4: //child
-                        c = new String[]{getTree().getPerson(rPID).getChildOfR()};
+                    case 3: //child
+                        a = new ArrayList<>();
+                        for (String r : tg.getPerson(rPID).getRelations()) {
+                            System.out.println(people.get(rPID).getRelations());
+                            System.out.println(r);
+                            Relationship w = getTree().getRelationship(r);
+                            if (w != null && w.getChildren() != null) {
+                                a.addAll(w.getChildren());
+                            }
+                        }
                         break;
-                    case 5: //partner
-                        d = new ArrayList(getTree().getPerson(rPID).getRelations());
+                    case 4: //partner
+                        a = new ArrayList<>();
+                        System.out.println("Starting p search" + rPID);
+                        if (getTree().getPerson(rPID).getRelations() != null) {
+                            System.out.println("Relation not null" + rPID);
+                            System.out.println(getTree().getPerson(rPID).getRelations());
+                            for (String r : getTree().getPerson(rPID).getRelations()) {
+                                System.out.println("Checking relation" + r);
+                                Relationship w = getTree().getRelationship(r);
+                                if (w != null && w.getParents() != null) {
+                                    System.out.println("w not null and parents present");
+                                    for (Person p : w.getParents()) {
+                                        System.out.println("Checking parent" + p.getPersonID());
+                                        if (p.getPersonID() != rPID) {
+                                            a.add(p);
+                                            System.out.println("Adding" + p.getPersonID());
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         break;
                     default:
                         break;
@@ -236,25 +264,37 @@ public class TreeSearch extends EntryPage {
                     try {
                         if (selection == 1) { //parents
                             try {
+                                if (a.isEmpty()) {
+                                    throw new IOException();
+                                }
                                 System.out.println(a);
                             } catch (Exception l) {
                                 System.out.println("ERROR INPUT: " + rPID + " has no parents.");
                             }
                         } else if (selection == 2) { //grandparents
                             try {
-                                System.out.println(b);
+                                if (a.isEmpty()) {
+                                    throw new IOException();
+                                }
+                                System.out.println(a);
                             } catch (Exception l) {
                                 System.out.println("ERROR INPUT: " + rPID + " has no grandparents.");
                             }
                         } else if (selection == 3) { //child
                             try {
-                                System.out.println(c);
+                                if (a.isEmpty()) {
+                                    throw new IOException();
+                                }
+                                System.out.println(a);
                             } catch (Exception l) {
                                 System.out.println("ERROR INPUT: " + rPID + " has no children.");
                             }
                         } else if (selection == 4) { //spouse
                             try {
-                                System.out.println(d);
+                                if (a.isEmpty()) {
+                                    throw new IOException();
+                                }
+                                System.out.println(a);
                             } catch (Exception l) {
                                 System.out.println("ERROR INPUT: " + rPID + " has no spouse.");
                             }
