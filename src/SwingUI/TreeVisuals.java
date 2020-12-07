@@ -5,17 +5,32 @@ import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.Locale;
+
+import static SwingUI.TreeFuncs.getTreeFuncs;
 
 public class TreeVisuals extends EntryPage {
     private static JFrame treeVisuals;
     private JPanel TreeVisuals;
+    private JButton back_btn;
+    private JTextArea printVisuals;
+
+    //TreeGenealogy tg = getTree();
+    //Map<String,People> mp = getPeople();
+    //Map<String,Relationship> mr = getRelations();
 
     public TreeVisuals() {
 
+        // Back button listener
+        back_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame treeFuncs = getTreeFuncs();
+                getTreeVisuals().setVisible(false);
+                treeFuncs.setVisible(true);
+            }
+        });
     }
 
     public static void setTreeVisuals(JFrame frame) {

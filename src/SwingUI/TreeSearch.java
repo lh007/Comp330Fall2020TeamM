@@ -19,6 +19,8 @@ import java.awt.event.ActionListener;
 import javax.swing.text.BadLocationException;
 import java.util.Locale;
 
+import static SwingUI.TreeFuncs.getTreeFuncs;
+
 public class TreeSearch extends EntryPage {
     private static JFrame treeSearch;
     private JPanel TreeSearch;
@@ -92,6 +94,16 @@ public class TreeSearch extends EntryPage {
         //=================================================
         //===================btns==========================
         //=================================================
+
+        //Navigate back to previous form
+        backButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame treeFuncs = getTreeFuncs();
+                getTreeSearch().setVisible(false);
+                treeFuncs.setVisible(true);
+            }
+        });
         //Search to person search page btn
         personButton.addActionListener(new ActionListener() {
             @Override
@@ -187,27 +199,27 @@ public class TreeSearch extends EntryPage {
                     }
                 } else if (!relationshipPIDField.getText().isEmpty()) {
                     try {
-                    rPID = relationshipPIDField.getText();
-                    int selection = personRelationshipChoice.getSelectedIndex();
-                    switch (selection) {
-                        case 0: //Does nothing
-                            break;
-                        case 1: //parents
-                            System.out.println(getTree().getParents(rPID));
-                            break;
-                        case 3: //grandparents
-                            System.out.println(getTree().getGrandParents(rPID));
-                            break;
-                        case 4: //child
-                            System.out.println(getTree().searchLastName(rPID));
-                            break;
-                        case 5: //partner
-                            System.out.println(getTree().getPerson(rPID).getRelations());
-                            break;
-                        default:
-                            break;
+                        rPID = relationshipPIDField.getText();
+                        int selection = personRelationshipChoice.getSelectedIndex();
+                        switch (selection) {
+                            case 0: //Does nothing
+                                break;
+                            case 1: //parents
+                                System.out.println(getTree().getParents(rPID));
+                                break;
+                            case 3: //grandparents
+                                System.out.println(getTree().getGrandParents(rPID));
+                                break;
+                            case 4: //child
+                                System.out.println(getTree().searchLastName(rPID));
+                                break;
+                            case 5: //partner
+                                System.out.println(getTree().getPerson(rPID).getRelations());
+                                break;
+                            default:
+                                break;
                         }
-                    }catch (Exception m){
+                    } catch (Exception m) {
                         System.out.println("ERROR INPUT: " + relationshipPIDField.getText() + " is not valid.");
                     }
                 }
@@ -216,21 +228,15 @@ public class TreeSearch extends EntryPage {
                 relationshipPIDField.setText("");
             }
         });
+
     }
 
     public static void setTreeSearch(JFrame frame) {
         treeSearch = frame;
     }
+
     public static JFrame getTreeSearch() {
         return treeSearch;
-    }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Tree Search");
-        frame.setContentPane(new TreeSearch().TreeSearch);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
     }
 
     //prints console to jtextarea
